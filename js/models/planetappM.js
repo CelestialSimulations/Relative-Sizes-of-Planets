@@ -9,7 +9,10 @@ define([
         // Initial attributes
         defaults:{
 
-          "planet_color": "green"
+          "planet_color": "green",
+          "width": 800,
+          "height":500,
+          "posY": 100
 
         },
 
@@ -20,7 +23,7 @@ define([
               "datasets": data,
             })
 
-        },
+        }
 
     });
 
