@@ -1,4 +1,4 @@
-/* 
+/*
 / Main script that acts as the entry point for the application
 */
 
@@ -15,10 +15,18 @@ requirejs.config({
 })
 
 // Main application single entry point
-requirejs([ 
-    'jquery', 
+requirejs([
+    'jquery',
     'd3',
-],function($, d3) {
-        
-    
+    'js/models/planetappM',
+    'js/views/planetappV'
+],function($, d3, planetModel, planetView) {
+
+        var planetData =  {
+                           "name":["Mercury","Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"],
+                           "mass":[ 0.330,	4.87, 5.97,	0.642, 1898,	568, 86.8,	102,	0.0146],
+                           "diameter":[4879,	12104, 12756,	6792,	142,984,	120,536,	51,118,	49,528,	2370]
+                        }
+
+
 });
