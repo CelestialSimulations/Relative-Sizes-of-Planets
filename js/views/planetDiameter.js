@@ -4,14 +4,14 @@ define([
     'jqueryui',
     'd3',
     'backbone',
-    'js/models/planetappM'
+    'js/models/planetModel'
 ], function($, $ui, d3, backbone, planetModel) {
 
   var planetView = backbone.View.extend({
 
     initialize: function() {
 
-      this.elementScale = "#planet_diameter";
+      /*this.elementScale = "#planet_diameter";
 
       this.width = this.model.get("width");
       this.height = this.model.get("height");
@@ -20,7 +20,7 @@ define([
             .attr("width", this.width)
             .attr("height", this.height);
 
-      this.draw_planets();
+      this.draw_planets();*/
 
 
     },
@@ -29,7 +29,7 @@ define([
 
       console.log(this.model.get("name"));
 
-      this.planets = this.svg.selectAll(".graph_planet");
+      //this.planets = this.svg.selectAll(".graph_planet");
     }
 
 

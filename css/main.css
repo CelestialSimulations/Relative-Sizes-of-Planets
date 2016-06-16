@@ -3,3 +3,19 @@
 Add main CSS here
 
 */
+.carousel-inner > .item > img,
+#myCarousel,
+.carousel-inner > .item > a > img {
+      width: 100px;
+      height: 100px;
+  }
+
+.carousel-control.Right {
+  right: 0;
+  left: auto;
+}
+
+.carousel-control.Left {
+  right: auto;
+  left: 0;
+}
