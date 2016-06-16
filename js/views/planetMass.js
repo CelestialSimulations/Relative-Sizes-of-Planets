@@ -21,8 +21,15 @@ define([
       //this.draw_chart();
       //this.planet_sliding();
       this.draw_svg_planets();
-      this.weight_scale();
+      //this.weight_scale();
 
+      this.sizeChart();
+      this.axis();
+      this.scale();
+      this.chart();
+      this.bar_width();
+      this.draw_bars();
+      this.model.set(this.type(this.model.get("data")));
     },
 
     planet_sliding: function() {
@@ -72,28 +79,60 @@ define([
 
     },
 
-    weight_scale: function() {
-      this.margin = {top: 20, right: 30, bottom: 30, left: 40},
+    draw_chart: function() {
+      this.svg = d3.select(this.elementMass).append("svg")
+            .attr("width", this.width)
+            .attr("height", this.height);
+    },
+
+
+    sizeChart: function(){
+        this.margin = {top: 20, right: 30, bottom: 30, left: 40},
             //console.log(document.
             width = 960 - this.margin.left - this.margin.right,
-            height = 500 - this.margin.top - this.margin.bottom;
+            height = 2000 - this.margin.top - this.margin.bottom;
+      },
 
-      this.chart = d3.select(".chart")
-            .attr("width", width + this.margin.left + this.margin.right)
-            .attr("height", height + this.margin.top + this.margin.bottom)
-            .append("g")
-            .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+    axis: function(){
+      var xAxis = d3.svg.axis()
+          .scale(this.x)
+          .orient("bottom");
 
+      var yAxis = d3.svg.axis()
+          .scale(this.y)
+          .orient("left")
+          .ticks(100, "lb");
+    },
+
+    scale: function(){
       this.x = d3.scale.ordinal()
-            .rangeRoundBands([0, width], .1);
+          .rangeRoundBands([0, width], 0);
 
       this.y = d3.scale.linear()
-            .range([height, 0]);
+          .range([height, 0]);
+    },
 
-      this.x.domain(this.model.get("mass").map(function(d) { return d.name; }));
-      this.y.domain([0, d3.max(this.model.get("mass"), function(d) { return d.value; })]);
+    chart: function(){
 
-      var barWidth = this.width / this.model.get("mass").length;
+      this.chart = d3.select(".chart")
+          .attr("width", width + this.margin.left + this.margin.right)
+          .attr("height", height + this.margin.top + this.margin.bottom)
+          .append("g")
+          .attr("transform", "translate(" + this.margin.left + "," + this.margin.top + ")");
+
+      //console.log(this.model.get("data").splice(1,2).map(function(d) { return d.name; }));
+      //var t = this.model.get("data").splice(1,2);
+      //console.log(this.model.get("data"));
+      this.x.domain(this.model.get("data").map(function(d) { return d.name; }));
+      this.y.domain([0, d3.max(this.model.get("data"), function(d) { return d.mass; })]);
+
+    },
+
+    bar_width: function(){
+      var barWidth = this.width / this.model.get("data").length;
+    },
+
+    draw_bars: function() {
 
       var scope = this;
 
@@ -104,15 +143,15 @@ define([
       this.yAxis = d3.svg.axis()
           .scale(this.y)
           .orient("left")
-          .ticks(10, "%");
+          .ticks(100, "lb");
 
       this.chart.selectAll(".bar")
-          .data(scope.model.get("mass"))
+          .data(scope.model.get("data").splice(1,2))
         .enter().append("rect")
           .attr("class", "bar")
           .attr("x", function(d) { return scope.x(d.name); })
-          .attr("y", function(d) { return scope.y(d.value); })
-          .attr("height", function(d) { return height - scope.y(d.value); })
+          .attr("y", function(d) { return scope.y(d.mass); })
+          .attr("height", function(d) { return height-scope.y(d.mass); })
           .attr("width", scope.x.rangeBand())
 
       this.chart.append("g")
@@ -126,10 +165,9 @@ define([
 
     },
 
-    draw_chart: function() {
-      this.svg = d3.select(this.elementMass).append("svg")
-            .attr("width", this.width)
-            .attr("height", this.height);
+    type: function(d) {
+      d.mass = +d.mass; // coerce to number
+      return d;
     }
 
 

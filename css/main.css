@@ -19,3 +19,32 @@ Add main CSS here
   right: auto;
   left: 0;
 }
+
+
+.bar {
+  fill: steelblue;
+  border-top-left-radius: 5px;
+}
+
+.rect {
+  color: red;
+}
+
+.bar:hover {
+  fill: brown;
+}
+
+.axis text {
+  font: 10px sans-serif;
+}
+
+.axis path,
+.axis line {
+  fill: none;
+  stroke: #000;
+  shape-rendering: crispEdges;
+}
+
+.x.axis path {
+  display: none;
+}

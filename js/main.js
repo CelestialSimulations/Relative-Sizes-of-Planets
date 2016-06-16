@@ -23,12 +23,28 @@ requirejs([
     'js/views/planetDiameter'
 ],function($, d3, planetModel, planetMass, planetDiameter) {
 
-        var planetData =  {
-                           "name":["Mercury","Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"],
-                           "mass":[0.330,	4.87, 5.97,	0.642, 1898,	568, 86.8,	102,	0.0146],
-                           "diameter":[4879,	12104, 12756,	6792,	142,984,	120,536,	51,118,	49,528,	2370],
-                           "color":["gray","yellow","green","red","orange","purple","steelblue","blue","black"]
-                        }
+        var planetData =  {"data":[
+        {name: "Mercury",	       mass: 0.330,       diameter: 4879},
+        {name: "Venus",	         mass: 4.87,        diameter: 12104},
+        {name: "Earth",      	   mass: 5.97,        diameter: 12756},
+        {name: "Mars",	         mass: 0.642,       diameter: 6792},
+        {name: "Jupiter",	       mass: 1898,        diameter: 142984},
+        {name: "Saturn",      	 mass: 568,         diameter: 120536},
+        {name: "Uranus",	       mass: 86.8,        diameter: 51118},
+        {name: "Neptune",	       mass: 102,         diameter: 49528},
+        {name: "Pluto",    	     mass: 0.0146,      diameter: 2370}]
+      }
+
+
+
+
+        /*{ "data":[
+                           {"name":["Mercury","Venus", "Earth", "Mars", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]},
+                           {"mass":[0.330,	4.87, 5.97,	0.642, 1898,	568, 86.8,	102,	0.0146]},
+                           {"diameter":[4879,	12104, 12756,	6792,	142,984,	120,536,	51,118,	49,528,	2370]},
+                           {"color":["gray","yellow","green","red","orange","purple","steelblue","blue","black"]}
+                         ]
+                       }*/
 
       this.planet_model = new planetModel (planetData);
 
