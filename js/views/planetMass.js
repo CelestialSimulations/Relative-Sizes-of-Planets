@@ -99,7 +99,7 @@ define([
 
     draw_rects: function() {
 
-      var scope = this;
+      /*var scope = this;
       this.chart.selectAll(".bar")
           .data(scope.model.get("data").splice(1,2))
         .enter().append("rect")
@@ -107,7 +107,7 @@ define([
           .attr("x", function(d) { return scope.x(d.name); })
           .attr("y", function(d) { return scope.y(d.mass); })
           .attr("height", function(d) { return height-scope.y(d.mass); })
-          .attr("width", scope.x.rangeBand())
+          .attr("width", scope.x.rangeBand())*/
     },
 
     sizeChart: function(){
