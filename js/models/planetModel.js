@@ -10,8 +10,8 @@ define([
         defaults:{
 
           "planet_color": "green",
-          "width": 800,
-          "height":500,
+          "width": 1000,
+          "height":1000,
           "posY": 100
 
         },
