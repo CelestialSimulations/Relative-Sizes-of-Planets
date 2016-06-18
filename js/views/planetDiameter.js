@@ -25,6 +25,7 @@ define([
       //this.draw_chart();
 
       this.size_slider();
+      this.planet_table();
 
 
     },
@@ -65,13 +66,13 @@ define([
 
       var scale=400;
 
-      this.planetImg = d3.select(this.elementScale)//.attr("margin", 20)//.append("img")
+      this.planetImg = d3.select("body").select("#planet_app").select("#planet_diameter").select("#planet_svgs").selectAll()//.attr("margin", 20)//.append("img")
                 .data(dataSorted)
             .enter()
                 .append("object")//.style("margin-left",function(d){ return d.distance/10+"px";})
               //  .style("z-index")
                 .style("position", "absolute")
-                .style("margin-top", function(d) {return -(d.diameter/2)/scale+window.innerHeight/2-200+"px";})
+                .style("margin-top", function(d) {return -(d.diameter/2)/scale+window.innerHeight/2+"px";})
                 .style("margin-left", function(d) {return -(d.diameter/2)/scale+window.innerWidth/2+"px";})
                 .attr("width",function(d){ return d.diameter/scale; })
                 .attr("height",function(d){ return d.diameter/scale; })
@@ -123,7 +124,7 @@ define([
                       .attr("width", function(d) { return interpolateRadius((d.diameter/400) * ui.value); })
                       .attr("height", function(d) { return interpolateRadius((d.diameter/400) * ui.value); })
                       .style("margin-left", function(d) { return interpolateRadius(-(d.diameter/800) * ui.value)+(window.innerWidth/*Height*//2)/** ui.value+150*/+"px"; })
-                      .style("margin-top", function(d) { return interpolateRadius(-(d.diameter/800) * ui.value)+(window.innerHeight/2-200)/** ui.value*/+"px"; })
+                      .style("margin-top", function(d) { return interpolateRadius(-(d.diameter/800) * ui.value)+(window.innerHeight/2)/** ui.value*/+"px"; })
                       .style("z-index", -1);
 
                 //  scope.planets.transition().duration(300)
@@ -140,6 +141,14 @@ define([
           //$("#slider").style("width", window.innerWidth-150+"px");
       });
 
+    },
+
+    planet_table: function() {
+      this.column = d3.select("#tablebody")
+                      .data(this.model.get("data"))
+                    .enter()
+                      .append("tr").append("td")
+                      .text(function(d){return d.name;});
     }
 
 

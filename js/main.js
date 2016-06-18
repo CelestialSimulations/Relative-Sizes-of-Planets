@@ -27,6 +27,7 @@ requirejs([
         {name: "Mercury",	       mass: 0.330,       diameter: 4879,        distance: 57.9,         color: "gray"},
         {name: "Venus",	         mass: 4.87,        diameter: 12104,       distance: 108.2,        color: "pink"},
         {name: "Earth",      	   mass: 5.97,        diameter: 12756,       distance: 149.6,        color: "green"},
+        {name: "Earth",      	   mass: 5.97,        diameter: 12756,       distance: 149.6,        color: "green"},
         {name: "Mars",	         mass: 0.642,       diameter: 6792,        distance: 227.9,        color: "red"},
         {name: "Jupiter",	       mass: 1898,        diameter: 142984,      distance: 778.6,        color: "orange"},
         {name: "Jupiter",	       mass: 1898,        diameter: 142984,      distance: 778.6,        color: "orange"},
@@ -49,10 +50,10 @@ requirejs([
 
       this.planet_model = new planetModel (planetData);
 
-      $("#mass").click(function() {
+      //$("#mass").click(function() {
         this.planet_mass_sim = new planetMass( { "model" : this.planet_model } );
         //return this.planet_mass_sim;
-      });
+      //});
       this.planet_diameter_sim = new planetDiameter( { "model" : this.planet_model } );
 
 

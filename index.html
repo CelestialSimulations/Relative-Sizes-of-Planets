@@ -27,14 +27,6 @@
           </h1>
         </div>
 
-        <p id="sliderText">
-          <label for="amount">Size:</label>
-          <input type="text" id="amount" value="100%" readonly style="border:0; font-weight:bold; background-color: rgba(0, 0, 0, 0);">
-        </p>
-
-        <!--<div id="slider" style="position: fixed; width: 700px; margin-top: 25px;"></div>-->
-        <div id="slider"></div>
-
           <!--
           <br>
           <div id="myCarousel" class="carousel slide">
@@ -72,11 +64,32 @@
           <div id="planet_app">
 
             <div id="planet_mass"></div>
-            <div id="planet_diameter"></div>
+
+            <div id="planet_diameter">
+
+              <p id="sliderText">
+                <label for="amount">Size:</label>
+                <input type="text" id="amount" value="100%" readonly style="border:0; font-weight:bold; background-color: rgba(0, 0, 0, 0);">
+              </p>
+
+              <!--<div id="slider" style="position: fixed; width: 700px; margin-top: 25px;"></div>-->
+              <div id="slider"></div>
+
+              <table class="table table-hover">
+                  <tbody id = "tablebody">
+                      <thead>
+                          <th colspan="1">Planet</th>
+                      </thead>
+                  </tbody>
+              </table>
+
+              <div id="planet_svgs"></div>
+
+            </div>
 
           </div>
 
-          <svg class="chart"></svg>
+          <!--<svg class="chart"></svg>-->
 
 
     </body>

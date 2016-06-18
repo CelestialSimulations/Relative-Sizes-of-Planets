@@ -20,21 +20,21 @@ define([
       //this.draw_planets();
       //this.draw_chart();
       //this.planet_sliding();
-      this.draw_svg_planets();
+      //this.draw_svg_planets();
       //this.weight_scale();
 
-      this.sizeChart();
-      //this.axis();
-      //this.scale();
-      //this.chart();
-      //this.bar_width();
-      //this.draw_bars();
-      //this.model.set(this.type(this.model.get("data")));
+      /*this.sizeChart();
+      this.axis();
+      this.scale();
+      this.chart();
+      this.bar_width();
+      this.draw_bars();
+      this.model.set(this.type(this.model.get("data")));*/
 
-      this.draw_rects_chart();
-      this.draw_rects();
+      //this.draw_rects_chart();
+      //this.draw_rects();
     },
-
+/*
     planet_sliding: function() {
       //$("#myCarousel").carousel({interval: false});
     },
@@ -71,7 +71,7 @@ define([
                       .attr("alt",planetName)
                       .attr("width",100)
                       .attr("height",100);
-        }*/
+        }*
 
 
     },
@@ -88,7 +88,7 @@ define([
             .attr("height", this.height);
     },
 
-    draw_rects_chart: function() {
+    /*draw_rects_chart: function() {
       this.chart = d3.select(".chart")
           .attr("width", width + this.margin.left + this.margin.right)
           .attr("height", height + this.margin.top + this.margin.bottom)
@@ -107,17 +107,17 @@ define([
           .attr("x", function(d) { return scope.x(d.name); })
           .attr("y", function(d) { return scope.y(d.mass); })
           .attr("height", function(d) { return height-scope.y(d.mass); })
-          .attr("width", scope.x.rangeBand())*/
-    },
+          .attr("width", scope.x.rangeBand())*
+    },*
 
     sizeChart: function(){
         this.margin = {top: 20, right: 30, bottom: 30, left: 40},
             //console.log(document.
             width = 960 - this.margin.left - this.margin.right,
             height = 2000 - this.margin.top - this.margin.bottom;
-      }
+      },
 
-/*
+
     axis: function(){
       var xAxis = d3.svg.axis()
           .scale(this.x)
@@ -193,7 +193,7 @@ define([
     type: function(d) {
       d.mass = +d.mass; // coerce to number
       return d;
-    } */
+    }*/
 
 
   });
