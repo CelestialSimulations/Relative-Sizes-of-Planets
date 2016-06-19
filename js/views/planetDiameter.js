@@ -9,6 +9,12 @@ define([
 
   var planetView = backbone.View.extend({
 
+    /***********************************************/
+    //
+    // initialize starts the program, and the code will not
+    // run without it. It does not have to be called.
+    //
+    /***********************************************/
     initialize: function() {
 
       this.elementScale = "#planet_diameter";
@@ -21,68 +27,59 @@ define([
           //  .attr("height", this.height);
 
       //this.sizeChart();
+      this.planet_table();
       this.draw_planets();
       //this.draw_chart();
 
       this.size_slider();
-      this.planet_table();
 
 
     },
 
-
-
+    /***********************************************/
+    //
+    // draw_planets will draw all of planets by creating
+    // object (html) tags to call on the planets svgs already
+    // in the file.
+    //
+    /***********************************************/
     draw_planets: function() {
 
-      //this.chart.append("svg:svg")
-              //.attr("src",)
+    /***********************************************/
+    // dataSorted sorts the data according to the key diameter,
+    // from least to greatest, so that the biggest planets are on
+    // the back and the smallest are in front.
+    /***********************************************/
+      var dataSorted = this.model.get("data").sort(
+        function(a,b) {
+          if (a.diameter > b.diameter) {
+            return -1;
+          }
+          if (a.diameter < b.diameter) {
+            return +1;
+          }
+          // a must be equal to b
+          return 0;
+        }
+      );
 
-      //this.svg.append("circle")
-      //        .attr()
-
-      //var scope = this;
-
-      /*var u = [];
-
-    for(var planetNumber = 0; planetNumber < 9; planetNumber++){
-
-      u.push(this.model.get("data")[planetNumber].mass);
-
-      //console.log(this.model.get("data")[planetNumber].mass);
-    }
-
-    console.log(u);*/
-    //return u;
-
-    var dataSorted = this.model.get("data").sort(function(a,b){
-      if (a.diameter > b.diameter) {
-      return -1;
-      }
-      if (a.diameter < b.diameter) {
-        return +1;
-      }
-      // a must be equal to b
-      return 0; } );
-
-      var scale=400;
-
-      this.planetImg = d3.select("body").select("#planet_app").select("#planet_diameter").select("#planet_svgs").selectAll()//.attr("margin", 20)//.append("img")
+      /***********************************************/
+      // planetImg is a variable that is all of the svgs. It appends
+      // the objects that attach to the svgs in the file with the "data"
+      // attributes.
+      /***********************************************/
+      this.planetImg = d3.select("#planet_svgs").selectAll()
                 .data(dataSorted)
             .enter()
-                .append("object")//.style("margin-left",function(d){ return d.distance/10+"px";})
-              //  .style("z-index")
-                .style("position", "absolute")
-                .style("margin-top", function(d) {return -(d.diameter/2)/scale+window.innerHeight/2+"px";})
-                .style("margin-left", function(d) {return -(d.diameter/2)/scale+window.innerWidth/2+"px";})
-                .attr("width",function(d){ return d.diameter/scale; })
-                .attr("height",function(d){ return d.diameter/scale; })
-                .attr("type", "image/svg+xml")
-                .attr("data", function(d) { return d.name+".svg"; });
-                //.attr("alt", function(d) { return d.name; });
-
-      /*this.svg.append("circle")
-              .attr("width",this.model.get("data")[planetNumber].diameter)
-              .attr("height",this.model.get("data")[planetNumber].diameter);*/
+                .append("object")
+                    .style("position", "absolute")
+                    .style("margin-top", function(d) {return -(d.diameter/2)/400+window.innerHeight/2+"px";})
+                    .style("margin-left", function(d) {return -(d.diameter/2)/400+window.innerWidth/2+"px";})
+                    .attr("width",function(d){ return d.diameter/400; })
+                    .attr("height",function(d){ return d.diameter/400; })
+                    .attr("type", "image/svg+xml")
+                    .attr("id", function(d){ return d.name+"_obj";})
+                    .attr("data", function(d) { return d.name+".svg"; });
 
     /*  this.planets = this.svg.selectAll("circle")
                         .data(this.model.get("data"))
@@ -96,16 +93,144 @@ define([
               .attr("r", function(d,r){ return (d.diameter/2)/500; } )
               .attr("fill", function(d,r) { return d.color; });*/
 
+    },
 
+    /***********************************************/
+    //
+    // planet_table creates a table using data, and also
+    // creates functions for the deselection and selection
+    // of the planets.
+    //
+    /***********************************************/
+    planet_table: function() {
+      /*this.column = d3.select("body")
+                      .data(this.model.get("data"))
+                    .enter()
+                      .append("tr").attr("id",function(d) {return d.name+"_id"}).append("td")
+                      .text(function(d){return d.name;});*/
 
-        //console.log(this.model.get("data")[planetNumber].name);
+      var scope = this;
 
-        //var planetName = this.model.get("data")[planetNumber].name;
-        //this.svg.append("img")
-        //        .attr("src",planetName+".svg");
-      //}
+      for(var r = 0; r < this.model.get("data").length; r++) {
+        this.value = scope.model.get("data")[r].diameter/400;
+        console.log(this.value);
+      }
 
-      //this.planets = d3.selectAll("#planet_diameter");
+      var pData = this.model.get("data");
+
+      var dataTable = function() {}
+
+      dataTable.prototype.add_element = function(pName) {
+
+          column = $("<td>").attr("id", "tablecolumn_"+pName)
+              .text(pName)
+              .attr("padding-right","300");
+
+          label = $("<tr>").append(column);
+          return label;
+
+      }
+
+      dataTable.prototype.build_list = function(parent, pathIndex) {
+
+          for (var e = 0; e < pathIndex.length; e++) {
+              menu = this.add_element(pathIndex[e]);
+              $(parent).append(menu);
+
+              /***********************************************/
+              // Try tweaking the menu, maybe you can style it better!
+              /***********************************************/
+              $(menu)
+                  .css("background-color","lightgray");
+
+              menu.click([pData[e], menu], click_row);
+              menu.mouseover([pData[e], menu], hover_row);
+
+              //menu.mouseout([traj.paths[e], menu], out_row);
+          }
+      }
+
+      var get_planet_name = function(d) {
+          var pName = [];
+          for (var i = 0; i < d.length; i++) {
+              pName.push(d[i].name);
+          }
+          return pName;
+      }
+
+      var click_row = function(d) {
+
+          var pName = d.data[0].name;
+          var menu = d.data[1];
+
+          $(menu)
+              .css("background-color", "white");
+
+          d3.select("#"+pName+"_obj").transition().duration(300)
+                .style("opacity", 0);
+
+          menu.unbind("mouseover");
+          menu.unbind("mouseout");
+
+          menu.click([d.data[0], menu], redraw_planet);
+      }
+
+      var redraw_planet = function(d) {
+
+        var pName = d.data[0].name;
+        var menu = d.data[1];
+
+        $(menu)
+            .css("background-color", "lightgray");
+
+        d3.select("#"+pName+"_obj").transition().duration(300)
+              .style("opacity", 1);
+
+              menu.unbind("mouseover");
+              menu.unbind("mouseout");
+
+        menu.click([d.data[0], menu], click_row);
+      }
+
+      var hover_row = function(d) {
+
+        var pName = d.data[0].name;
+        var menu = d.data[1];
+
+        d3.select("#"+pName+"_obj").property(this.value).transition().duration(300)
+              .style("opacity", .7)
+              .style("margin-top", this.value/*function(d) { return -(d.diameter/2)/400+window.innerHeight/2*/-10+"px")
+              .style("margin-left", this.value/*function(d) {return -(d.diameter/2)/400+window.innerWidth/2*/-10+"px")
+              .attr("width", d.data[0].diameter/400+20+"px")
+              .attr("height", d.data[0].diameter/400+20+"px");
+
+        menu.mouseout([d.data[0], menu], out_row);
+      }
+
+      var out_row  = function(d) {
+
+        var pName = d.data[0].name;
+        var menu = d.data[1];
+
+        d3.select("#"+pName+"_obj").property(this.value).transition().duration(300)
+              .style("opacity", 1)
+              .style("margin-top", this.value/*function(d) {return -(d.diameter/2)/400+window.innerHeight/2*/+"px")
+              .style("margin-left", this.value/*function(d) {return -(d.diameter/2)/400+window.innerWidth/2*/+"px")
+              .attr("width", d.data[0].diameter/400+"px")
+              .attr("height", d.data[0].diameter/400+"px");
+
+      }
+
+      var pName = get_planet_name(pData);
+
+      /***********************************************/
+      // list.build_list calls the table with the paremeter of
+      // the function pName, and the table uses that data for
+      // the names of the planets.
+      /***********************************************/
+      var list = new dataTable();
+      list.build_list("#tablebody", pName);
+
     },
 
     size_slider: function() {
@@ -115,16 +240,20 @@ define([
       $(function() {
           $( "#slider" ).slider({
               value: 1,
-              min: -.005,
-              max: 40.005,
-              step: .005,
+              min: 0,
+              max: 50.01,
+              step: .01,
               slide: function( event, ui ) {
                   $( "#amount" ).val( ui.value*100+"%" );
+                  for(var r = 0; r < scope.model.get("data").length; r++) {
+                    scope.value = interpolateRadius(scope.model.get("data")[r].diameter/400 * ui.value);
+                  //  console.log(scope.value);
+                  }
                   scope.planetImg.transition().duration(300)
-                      .attr("width", function(d) { return interpolateRadius((d.diameter/400) * ui.value); })
+                      .attr("width", function(d) { /*valueTaker(interpolateRadius((d.diameter/400) * ui.value));*/ return interpolateRadius((d.diameter/400) * ui.value); })
                       .attr("height", function(d) { return interpolateRadius((d.diameter/400) * ui.value); })
-                      .style("margin-left", function(d) { return interpolateRadius(-(d.diameter/800) * ui.value)+(window.innerWidth/*Height*//2)/** ui.value+150*/+"px"; })
-                      .style("margin-top", function(d) { return interpolateRadius(-(d.diameter/800) * ui.value)+(window.innerHeight/2)/** ui.value*/+"px"; })
+                      .style("margin-left", function(d) { return interpolateRadius(-(d.diameter/800) * ui.value)+(window.innerWidth/2)+"px"; })
+                      .style("margin-top", function(d) { return interpolateRadius(-(d.diameter/800) * ui.value)+(window.innerHeight/2)+"px"; })
                       .style("z-index", -1);
 
                 //  scope.planets.transition().duration(300)
@@ -137,18 +266,14 @@ define([
                       //.attr("height", interpolateRadius((d.diameter/400) * ui.value)+20);
               }
           });
-          $( "#amount" ).val( $( "#slider" ).slider( "diameter" ) );
+          $( "#amount" ).val( $( "#slider" ).slider( "value" ) );
           //$("#slider").style("width", window.innerWidth-150+"px");
       });
 
-    },
+      var valueTaker = function(dia) {
+        console.log(dia);
+      }
 
-    planet_table: function() {
-      this.column = d3.select("#tablebody")
-                      .data(this.model.get("data"))
-                    .enter()
-                      .append("tr").append("td")
-                      .text(function(d){return d.name;});
     }
 
 

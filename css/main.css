@@ -4,6 +4,16 @@ Add main CSS here
 
 */
 
+.ui-accordion > .ui-accordion-header {
+  background: steelblue;
+  color: white;
+  font-family: Helvetica Neue;
+}
+
+.ui-accordion > .ui-accordion-content {
+  padding: 0px !important;
+}
+
 .carousel-inner > .item > img,
 #myCarousel,
 .carousel-inner > .item > a > img {

@@ -12,6 +12,7 @@
         <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
+        <script src="lib/jquery-ui/jquery-ui.min.js"></script>
         <!-- The main script is the entry point for the application -->
         <script data-main="js/main" src="lib/require/require.js"></script>
     </head>
@@ -75,13 +76,23 @@
               <!--<div id="slider" style="position: fixed; width: 700px; margin-top: 25px;"></div>-->
               <div id="slider"></div>
 
-              <table class="table table-hover">
-                  <tbody id = "tablebody">
-                      <thead>
-                          <th colspan="1">Planet</th>
-                      </thead>
-                  </tbody>
-              </table>
+              <div id="accordion" style="margin-top: 20px; width: 150px; float: left; padding: -10px;">
+
+                <h3>Planet Selection</h3>
+                <div>
+                  <table class="table table-hover" style="margin: 0px; padding: 0px;">
+                      <tbody id = "tablebody" style="margin: 0px; padding: 0px;">
+                          <tr>
+                          </tr>
+                      </tbody>
+                  </table>
+                </div>
+
+              </div>
+
+              <script>
+              $( "#accordion" ).accordion({collapsible: true, animate: "swing", heightStyle: "content"});
+              </script>
 
               <div id="planet_svgs"></div>
 
