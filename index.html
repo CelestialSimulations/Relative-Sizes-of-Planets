@@ -6,6 +6,8 @@
         <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="lib/jquery-ui/jquery-ui.css">
+        <link rel="stylesheeet" href="lib/jquery-ui/jquery-multiselect.css">
+
         <script src="lib/jquery/jquery.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.1/p5.js">
 
@@ -13,8 +15,11 @@
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
         <script src="lib/jquery-ui/jquery-ui.min.js"></script>
+        <script src="lib/jquery-ui/jquery-multiselect.js"></script>
         <!-- The main script is the entry point for the application -->
         <script data-main="js/main" src="lib/require/require.js"></script>
+
+        <script type="text/javascript" src="../src/jquery.multiselect.js"></script>
     </head>
 
     <body>
@@ -76,7 +81,7 @@
               <!--<div id="slider" style="position: fixed; width: 700px; margin-top: 25px;"></div>-->
               <div id="slider"></div>
 
-              <div id="accordion" style="margin-top: 20px; width: 150px; float: left; padding: -10px;">
+              <!--<div id="accordion" style="margin-top: 20px; width: 150px; float: left; padding: -10px;">-->
 
                 <h3>Planet Selection</h3>
                 <div>
@@ -90,8 +95,15 @@
 
               </div>
 
+              <!--<select id="s">-->
+                <!--<option selected="selected">543</option>
+                <option selected="selected">543d</option>
+                <option selected="selected">fed</option>-->
+            <!--  </select>-->
+
               <script>
-              $( "#accordion" ).accordion({collapsible: true, animate: "swing", heightStyle: "content"});
+            //  $( "#accordion" ).accordion({collapsible: true, animate: "swing", heightStyle: "content"});
+              //$("#s").multiselect();
               </script>
 
               <div id="planet_svgs"></div>
