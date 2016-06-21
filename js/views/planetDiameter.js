@@ -36,7 +36,8 @@ define([
         // By applying .toggle the div #planet_diameter, it
         // allows the user to see the simulation since it is
         // applying style="display: inline", which shows the div
-        $("#planet_diameter").toggle("slide",300);
+        $("#planet_diameter").toggle("fade",300);
+        $("#planet_mass").toggle("fade", 300);
       });
     },
 
@@ -114,6 +115,8 @@ define([
                     .style("position", "absolute")
                     .style("margin-top", function(d) {return -(d.diameter/2)/400+window.innerHeight/2-100+"px";})
                     .style("margin-left", function(d) {return -(d.diameter/2)/400+window.innerWidth/2+"px";})
+                    .style("margin-bottom","200px")
+                    .style("margin-right","200px")
                     // width and height are determine the dimensions of
                     // the individual planets
                     .attr("width",function(d){ return d.diameter/400; })
@@ -182,12 +185,15 @@ define([
 
         checkAll: function() {
           //$("#"+ui.value+"_obj").toggle("size", 3000);
+          for(var i = 0; i < scope.model.get("data").length; i++) {
+            $("#"+scope.model.get("data")[i].name+"_obj").show("size",3000);
+          }
         },
 
         uncheckAll: function() {
-          /*for(var i = 0; i < scope.model.get("data").length; i++) {
-            $("#"+scope.model.get("data")[i].name+"_obj").toggle(["size",3000]);
-          }*/
+          for(var i = 0; i < scope.model.get("data").length; i++) {
+            $("#"+scope.model.get("data")[i].name+"_obj").hide("size",3000);
+          }
           //d3.select("img").transition().dur
           //console.log(ui.value)
           //$("#"+ui.value+"_obj").toggle("size", 3000);

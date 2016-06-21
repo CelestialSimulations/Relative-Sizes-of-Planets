@@ -41,13 +41,40 @@ define([
 
     activate_mass_sim: function() {
       $("#mass").click(function(){
-        $("#planet_mass").toggle("slide", 300);
+        $("#planet_mass").toggle("fade", 300);
+        $("#planet_diameter").toggle("fade", 300);
       });
     },
 
     draw_planets: function() {
 
-      this.planet1 = d3.select("#mass_planet_svgs").selectAll()
+      this.active_planet = d3.select(".carousel-inner")
+                              //.data(this.model.get("data"))
+                           //.enter()
+                              .append("div")
+                                .attr("class","item active c")
+                              .append("img")
+                                .attr("width","100px")
+                                .attr("height", "100px")
+                                .attr("src","PlanetSVGs/Earth.svg");
+
+      this.planet1 = d3.select(".carousel-inner").selectAll()
+                         .data(this.model.get("data"))
+                      .enter()
+                         .append("div")
+                            .attr("class","item")
+                            .attr("id",function(d) { return d.name+"_div";})
+                         .append("img")
+                            .attr("id",function(d) { return d.name+"_img";})
+                            //.style("margin-top", function(d) { return d.mass/3-200+"px";})
+                            .attr("width","100px")
+                            .attr("height", "100px")
+                            .attr("src", function(d) { return "PlanetSVGs/"+d.name+".svg";});
+
+      $("#l").insertAfter("#Pluto_div");
+      $("#r").insertAfter("#Pluto_div");
+
+      /*this.planet1 = d3.select("#mass_planet_svgs").selectAll()
                          .data(this.model.get("data"))
                       .enter()
                          .append("img")
@@ -55,7 +82,7 @@ define([
                          //.style("margin-top", function(d) { return d.mass/3-200+"px";})
                          .attr("width","100px")
                          .attr("height", "100px")
-                         .attr("src", function(d) { return "PlanetSVGs/"+d.name+".svg";});
+                         .attr("src", function(d) { return "PlanetSVGs/"+d.name+".svg";});*/
 
      /*this.planet2 = d3.select("#planet_mass")
                         .append("img")
@@ -67,8 +94,17 @@ define([
     planet_drop: function() {
       var scope = this;
       $("#drop_btn").click(function() {
-        scope.planet1.transition().duration(/*function(d){return d.mass}*/300)
-                  .style("margin-top", function(d) { return d.mass/3+"px";});
+        for( var i = 0; i < scope.model.get("data").length; i++ ) {
+
+          //$("#Pluto_div").addClass("active");
+
+          //$("div.active").insertAfter("#myCarousel").removeClass("active").addClass("dropped");//.insertAfter("#l");
+
+          //d3.select(".dropped").transition().duration(300)
+          //      .style("margin-top", "300px"/*scope.model.get("data")[i].mass/3+"px"*/);
+        }
+        /*$('.item active')*///scope.planet1.transition().duration(/*function(d){return d.mass}*/300)
+                  //.style("margin-top", function(d) { return d.mass/3+"px";});
       });
 
     }
