@@ -23,11 +23,21 @@ define([
     initialize: function() {
 
       //this.planet_table();
-      this.planet_select();
+      this.activate_diameter_sim();
       this.draw_planets();
+      this.planet_select();
       this.size_slider();
 
 
+    },
+
+    activate_diameter_sim: function() {
+      $("#diameter").click(function() {
+        // By applying .toggle the div #planet_diameter, it
+        // allows the user to see the simulation since it is
+        // applying style="display: inline", which shows the div
+        $("#planet_diameter").toggle("slide",300);
+      });
     },
 
     /***********************************************/
@@ -102,7 +112,7 @@ define([
                     // the margin push the planet to be in the center of
                     // each other, and the absolute position allows that
                     .style("position", "absolute")
-                    .style("margin-top", function(d) {return -(d.diameter/2)/400+window.innerHeight/2+"px";})
+                    .style("margin-top", function(d) {return -(d.diameter/2)/400+window.innerHeight/2-100+"px";})
                     .style("margin-left", function(d) {return -(d.diameter/2)/400+window.innerWidth/2+"px";})
                     // width and height are determine the dimensions of
                     // the individual planets
@@ -115,7 +125,7 @@ define([
                     // the svgs in the file, and d.name is the name of all of
                     // the planets. Try uncommenting the log to see what
                     // d.name looks like.
-                    .attr("src", function(d) { /*console.log(d.name);*/ return d.name+".svg"; });
+                    .attr("src", function(d) { /*console.log(d.name);*/ return "PlanetSVGs/"+d.name+".svg"; });
 
           /*d3.select("#planet_svgs")
                   //.data(dataSorted)
@@ -175,9 +185,9 @@ define([
         },
 
         uncheckAll: function() {
-          for(var i = 0; i < scope.model.get("data").length; i++) {
+          /*for(var i = 0; i < scope.model.get("data").length; i++) {
             $("#"+scope.model.get("data")[i].name+"_obj").toggle(["size",3000]);
-          }
+          }*/
           //d3.select("img").transition().dur
           //console.log(ui.value)
           //$("#"+ui.value+"_obj").toggle("size", 3000);
@@ -349,7 +359,7 @@ define([
                       .attr("width", function(d) { return interpolateRadius((d.diameter/400) * ui.value)+"px"; })
                       .attr("height", function(d) { return interpolateRadius((d.diameter/400) * ui.value)+"px"; })
                       .style("margin-left", function(d) { return interpolateRadius(-(d.diameter/800) * ui.value)+(window.innerWidth/2)+"px"; })
-                      .style("margin-top", function(d) { return interpolateRadius(-(d.diameter/800) * ui.value)+(window.innerHeight/2)+"px"; })
+                      .style("margin-top", function(d) { return interpolateRadius(-(d.diameter/800) * ui.value)+(window.innerHeight/2-100)+"px"; })
                       .style("z-index", -1);
               }
           });

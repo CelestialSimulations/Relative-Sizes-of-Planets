@@ -12,6 +12,9 @@ define([
 
     initialize: function() {
 
+      this.activate_mass_sim();
+      this.draw_planets();
+
       //this.elementMass = "#planet_mass";
 
       //this.width = this.model.get("width");
@@ -33,6 +36,29 @@ define([
 
       //this.draw_rects_chart();
       //this.draw_rects();
+    },
+
+    activate_mass_sim: function() {
+      $("#mass").click(function(){
+        $("#planet_mass").toggle("slide", 300);
+      });
+    },
+
+    draw_planets: function() {
+      this.planet1 = d3.select("#planet_mass").selectAll()
+                         .data(this.model.get("data"))
+                      .enter()
+                         .append("img")
+                         .style("margin-top", function(d) { return d.mass/3+"px";})
+                         .attr("width","100px")
+                         .attr("height", "100px")
+                         .attr("src", function(d) { return "PlanetSVGs/"+d.name+".svg";});
+
+     /*this.planet2 = d3.select("#planet_mass")
+                        .append("img")
+                        .attr("src","PlanetSVGs/Earth.svg")
+                        .attr("width","100px")
+                        .attr("height", "100px");*/
     },
 /*
     planet_sliding: function() {
