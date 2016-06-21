@@ -14,6 +14,7 @@ define([
 
       this.activate_mass_sim();
       this.draw_planets();
+      this.planet_drop();
 
       //this.elementMass = "#planet_mass";
 
@@ -45,11 +46,13 @@ define([
     },
 
     draw_planets: function() {
-      this.planet1 = d3.select("#planet_mass").selectAll()
+
+      this.planet1 = d3.select("#mass_planet_svgs").selectAll()
                          .data(this.model.get("data"))
                       .enter()
                          .append("img")
-                         .style("margin-top", function(d) { return d.mass/3+"px";})
+                         .attr("id",function(d) { return d.name+"_img";})
+                         //.style("margin-top", function(d) { return d.mass/3-200+"px";})
                          .attr("width","100px")
                          .attr("height", "100px")
                          .attr("src", function(d) { return "PlanetSVGs/"+d.name+".svg";});
@@ -60,6 +63,15 @@ define([
                         .attr("width","100px")
                         .attr("height", "100px");*/
     },
+
+    planet_drop: function() {
+      var scope = this;
+      $("#drop_btn").click(function() {
+        scope.planet1.transition().duration(/*function(d){return d.mass}*/300)
+                  .style("margin-top", function(d) { return d.mass/3+"px";});
+      });
+
+    }
 /*
     planet_sliding: function() {
       //$("#myCarousel").carousel({interval: false});
