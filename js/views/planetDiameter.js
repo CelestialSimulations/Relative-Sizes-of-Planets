@@ -5,7 +5,10 @@ define([
     'd3',
     'backbone',
     'js/models/planetModel',
-    'lib/jquery-ui/jquery-multiselect'
+    'lib/jquery-ui/jquery-multiselect',
+    'dist/jquery.svg.es5.min'
+    //'lib/jquery/dist/jquery.svg.es5.js',
+    //'lib/jquery/dist/jquery.svg.js'
 
 ], function($, $ui, d3, backbone, planetModel) {
 
@@ -30,7 +33,7 @@ define([
     /***********************************************/
     //
     // draw_planets will draw all of planets by creating
-    // object (html) tags to call on the planets svgs already
+    // object (html) tags to call on the planet svgs already
     // in the file.
     //
     /***********************************************/
@@ -38,13 +41,15 @@ define([
 
       var letmeclosethistabfunction;
 
+      /***********************************************/
       // This file uses data from external files.
       // this.model.get("data") calls to the planetModel.js file,
-      // and in turn, the file calls to main.js for the  data. To
+      // and in turn, the file calls to main.js for the data. To
       // see what the data looks like, uncomment the following log,
       // and open the Javascript Console via broswer menu > View >
-      // Javascript Console.
+      // Developer > Javascript Console (on Chrome or Firefox)
       /* console.log(this.model.get("data")); */
+      /***********************************************/
 
       /***********************************************/
       // dataSorted sorts the data according to the key diameter,
@@ -91,9 +96,8 @@ define([
                 /***********************************************/
                 .data(dataSorted)
             .enter()
-                .append("object")
+                .append("img")
                     .attr("data-toggle", "tooltip")
-                    .attr("data-placement", "auto top")
                     .attr("title", function(d) { return d.name; })
                     // the margin push the planet to be in the center of
                     // each other, and the absolute position allows that
@@ -104,13 +108,27 @@ define([
                     // the individual planets
                     .attr("width",function(d){ return d.diameter/400; })
                     .attr("height",function(d){ return d.diameter/400; })
-                    .attr("type", "image/svg+xml")
+                    //.attr("type", "image/svg+xml")
                     .attr("id", function(d){ return d.name+"_obj";})
+                    .attr("class","img-circle")
                     // This data attribute, as explained before, calls upon
                     // the svgs in the file, and d.name is the name of all of
                     // the planets. Try uncommenting the log to see what
                     // d.name looks like.
-                    .attr("data", function(d) { /*console.log(d.name);*/ return d.name+".svg"; });
+                    .attr("src", function(d) { /*console.log(d.name);*/ return d.name+".svg"; });
+
+          /*d3.select("#planet_svgs")
+                  //.data(dataSorted)
+              //.enter()
+                  .append("object")
+                  .style("position", "absolute")
+                  .style("margin-top", -(dataSorted[1].diameter/2)/400+window.innerHeight/2-70+"px")
+                  .style("margin-left", -(dataSorted[1].diameter/2)/400+window.innerWidth/2-150+"px")
+                  .attr("width", (dataSorted[1].diameter+100000)/400)
+                  .attr("height", (dataSorted[1].diameter+100000)/400)
+                  .attr("data", "RingsOfSaturn.svg");
+
+                  console.log(dataSorted[1].diameter);*/
 
           //Additional features added easily with jQuery-ui.
           //
@@ -119,9 +137,16 @@ define([
           //.draggable makes the div containing the svgs draggable
           $("#planet_svgs").draggable();
 
+          //$("#Jupiter_obj").setSVGStyle("fill","blue");
+
+          //document.querySelector("#Jupiter_obj").getSVGDocument().getElementByID("circle_jupiter").setAttribute("fill","blue");
+          //$("#Jupiter_obj").getSVG().find("g circle").attr('fill', 'blue');
+
     },
 
     planet_select: function() {
+
+      var scope = this;
 
       var options = d3.select("#planet_diameter").append("select").attr("multiple","").selectAll()
             .data(this.model.get("data"))
@@ -134,22 +159,6 @@ define([
             .attr("value", function(d){return d.name;})
             .text(function(d){return d.name});
 
-      //d3.select("#Jupiter_opt").attr("select","selected");
-
-    //  $("Mercury_opt").attr("disabled", "disabled");
-
-      for(var a = 0; a < this.model.get("data").length; a++) {
-        //console.log(this.model.get("data")[a].name);
-        //$("#s").val(this.model.get("data")[a].name+"_val");
-        //$("#s").append("<option>").text(this.model.get("data")[a].name);
-        //$("#"+this.model.get("data")[a].name+"_opt").attr("selected", true);
-      }
-     //$("#s").val("Earth");
-     //$("#s").val("Mars");
-      //d3.select("#s").selectAll().val(function(d){return d.name+"_val";});
-      //$("#Mars_opt").attr("selected","selected");
-      //$("#Earth_opt").attr("selected","selected");
-
       $("select").multiselect({
 
         selectedList: 9,
@@ -159,6 +168,19 @@ define([
           d3.select("#"+ui.value+"_obj").transition().duration(300)
           .style("opacity",".6");*/
           $("#"+ui.value+"_obj").toggle("size", 3000);
+        },
+
+        checkAll: function() {
+          //$("#"+ui.value+"_obj").toggle("size", 3000);
+        },
+
+        uncheckAll: function() {
+          for(var i = 0; i < scope.model.get("data").length; i++) {
+            $("#"+scope.model.get("data")[i].name+"_obj").toggle(["size",3000]);
+          }
+          //d3.select("img").transition().dur
+          //console.log(ui.value)
+          //$("#"+ui.value+"_obj").toggle("size", 3000);
         },
 
       });

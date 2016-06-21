@@ -4,7 +4,11 @@ Add main CSS here
 
 */
 
-object:hover {
+#circle_jupiter {
+  fill: blue;
+}
+
+img:hover {
   opacity: .5;
 }
 

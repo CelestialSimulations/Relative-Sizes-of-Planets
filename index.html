@@ -9,6 +9,7 @@
         <link rel="stylesheeet" href="lib/jquery-ui/jquery-multiselect.css">
 
         <script src="lib/jquery/jquery.min.js"></script>
+        <script src="dist/jquery.svg.es5.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.1/p5.js">
 
         <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
@@ -19,7 +20,8 @@
         <!-- The main script is the entry point for the application -->
         <script data-main="js/main" src="lib/require/require.js"></script>
 
-        <script type="text/javascript" src="../src/jquery.multiselect.js"></script>
+        <!--<script type="text/javascript" src="../src/jquery.multiselect.js"></script>-->
+
     </head>
 
     <body>
@@ -101,12 +103,20 @@
                 <option selected="selected">fed</option>-->
             <!--  </select>-->
 
-              <script>
+
+
+              <div id="planet_svgs">
+                <!--<object id="Jupiter_ob" data="Jupiter.svg"></object>-->
+              </div>
+
+              <script type="text/javascript">
+              //$("embed-css").html()
+              //$("#Jupiter_ob").setSVGStyleLink('css/main.css')
+
+              //$("#Jupiter_ob").getSVG().find("#circle_jupiter").attr("fill","blue");
             //  $( "#accordion" ).accordion({collapsible: true, animate: "swing", heightStyle: "content"});
               //$("#s").multiselect();
               </script>
-
-              <div id="planet_svgs"></div>
 
             </div>
 
