@@ -60,6 +60,10 @@ img:hover {
   left: 0;
 }
 
+#myCarousel {
+  /*margin-right: -100px !important;*/
+}
+
 
 .bar {
   fill: steelblue;

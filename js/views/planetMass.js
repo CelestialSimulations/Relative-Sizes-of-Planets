@@ -5,6 +5,7 @@ define([
     'd3',
     'backbone',
     'js/models/planetModel'
+    //'slick/slick.min.js'
     //'earth'
 ], function($, $ui, d3, backbone, planetModel) {
 
@@ -48,31 +49,59 @@ define([
 
     draw_planets: function() {
 
-      this.active_planet = d3.select(".carousel-inner")
+      this.active_planet = d3.select("#ci1")
                               //.data(this.model.get("data"))
                            //.enter()
                               .append("div")
-                                .attr("class","item active c")
+                                .attr("class","item active")
                               .append("img")
                                 .attr("width","100px")
                                 .attr("height", "100px")
-                                .attr("src","PlanetSVGs/Earth.svg");
+                                .attr("src","PlanetSVGs/Mercury.svg");
 
-      this.planet1 = d3.select(".carousel-inner").selectAll()
+      this.passive_planets = d3.select("#ci1").selectAll()
                          .data(this.model.get("data"))
                       .enter()
                          .append("div")
                             .attr("class","item")
-                            .attr("id",function(d) { return d.name+"_div";})
+                            .attr("id",function(d) { return d.name+"_div_1";})
+                            //.attr("class","svgs")
                          .append("img")
-                            .attr("id",function(d) { return d.name+"_img";})
+                            //.attr("id",function(d) { return d.name+"_img";})
                             //.style("margin-top", function(d) { return d.mass/3-200+"px";})
                             .attr("width","100px")
                             .attr("height", "100px")
                             .attr("src", function(d) { return "PlanetSVGs/"+d.name+".svg";});
 
-      $("#l").insertAfter("#Pluto_div");
-      $("#r").insertAfter("#Pluto_div");
+      this.active_planet_2 = d3.select("#ci2")
+                              //.data(this.model.get("data"))
+                           //.enter()
+                              .append("div")
+                                .attr("class","item active")
+                              .append("img")
+                                .attr("width","100px")
+                                .attr("height", "100px")
+                                .attr("src","PlanetSVGs/Mercury.svg");
+
+      this.passive_planets_2 = d3.select("#ci2").selectAll()
+                         .data(this.model.get("data"))
+                      .enter()
+                         .append("div")
+                            .attr("class","item")
+                            .attr("id",function(d) { return d.name+"_div_2";})
+                            //.attr("class","svgs")
+                         .append("img")
+                            //.attr("id",function(d) { return d.name+"_img";})
+                            //.style("margin-top", function(d) { return d.mass/3-200+"px";})
+                            .attr("width","100px")
+                            .attr("height", "100px")
+                            .attr("src", function(d) { return "PlanetSVGs/"+d.name+".svg";});
+
+
+      var plut = $('div.item').has('[src="PlanetSVGs/Pluto.svg"]');
+
+      $("#l, #r").insertAfter("#Pluto_div_1");
+      $("#l2, #r2").insertAfter("#Pluto_div_2");
 
       /*this.planet1 = d3.select("#mass_planet_svgs").selectAll()
                          .data(this.model.get("data"))
@@ -94,15 +123,38 @@ define([
     planet_drop: function() {
       var scope = this;
       $("#drop_btn").click(function() {
-        for( var i = 0; i < scope.model.get("data").length; i++ ) {
+        //for( var i = 0; i < scope.model.get("data").length; i++ ) {
+
 
           //$("#Pluto_div").addClass("active");
+          //var
 
-          //$("div.active").insertAfter("#myCarousel").removeClass("active").addClass("dropped");//.insertAfter("#l");
+          $("#ci1 div.active img").attr("class","original1").clone().attr("class","copy1").appendTo("#ci1 div.active");
+          $(".original1").insertAfter("#myCarousel");//.addClass("dropped");//.insertAfter("#l");
+          //$(".dropped").clone().appendTo("div.active");
+          //$("div.active").toggle();
 
-          //d3.select(".dropped").transition().duration(300)
-          //      .style("margin-top", "300px"/*scope.model.get("data")[i].mass/3+"px"*/);
-        }
+          $("#ci2 div.active img").attr("class","original2").clone().attr("class","copy2").appendTo("#ci2 div.active");
+          $(".original2").insertAfter("#myCarousel");
+
+        //for( var i = 0; i < scope.model.get("data").length; i++ ) {
+          //console.log(scope.model.get("data")[i].mass);
+          d3.select(".original1").transition().duration(1000)
+                .style("position", "absolute")
+                //.attr("width",function (d){return d.diameter/400+"px"})
+                //.attr("height",function (d){return d.diameter/400+"px"})
+                //.style("margin-left",function(d){return -d.diameter/800+50+"px"})
+                .style("margin-bottom", "100px")
+                .style("margin-top", function(d){return d.mass/*+d.diameter/800*/+300+"px";});///*scope.model.get("data")[i].mass/3+"px"*/);
+
+          d3.select(".original2").transition().duration(1000)
+                .style("position", "absolute")
+                //.attr("width",function (d){return d.diameter/400+"px"})
+                //.attr("height",function (d){return d.diameter/400+"px"})
+                //.style("margin-left",function(d){return -d.diameter/800+50+"px"})
+                .style("margin-bottom", "100px")
+                .style("margin-top", function(d){return d.mass/*+d.diameter/800*/+300+"px";});
+        //}
         /*$('.item active')*///scope.planet1.transition().duration(/*function(d){return d.mass}*/300)
                   //.style("margin-top", function(d) { return d.mass/3+"px";});
       });

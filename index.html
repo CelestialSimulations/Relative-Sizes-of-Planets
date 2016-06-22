@@ -2,13 +2,22 @@
 <html>
     <!-- Header where scripts and stylesheets are called -->
     <head>
+      <meta charset="UTF-8">
         <!-- Calls to CSS Stylesheets -->
         <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="lib/jquery-ui/jquery-ui.css">
         <link rel="stylesheeet" href="lib/jquery-ui/jquery-multiselect.css">
 
+        <!--<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
+        <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>-->
+
         <script src="lib/jquery/jquery.min.js"></script>
+
+        <!--<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+        <script type="text/javascript" src="slick/slick.min.js"></script>-->
+
         <script src="dist/jquery.svg.es5.min.js"></script>
         <link href="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.1/p5.js">
 
@@ -28,7 +37,7 @@
       <div class="container" id="main_page">
 
         <div class="page-header">
-          <h1>Arc Planet
+          <h1>Relative Size of Planets <small>Simulations</small>
             <div style="float: right;" class="btn-group" data-toggle="buttons">
               <label id="mass" class="btn btn-primary active">
                 <input type="radio" name="options" autocomplete="off" checked> Mass Simulation
@@ -43,16 +52,15 @@
           <!-- where planet applications go -->
           <div id="planet_app">
 
-            <div id="planet_mass" type="radio">
+            <div id="planet_mass" style="position: relative;">
+
+              <button id="drop_btn" style="margin-bottom:10px;" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                Drop
+              </button>
 
               <div id="myCarousel" class="carousel slide">
-
-                <button id="drop_btn" type="button" href="#myCarousel" data-slide="next" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                  Drop
-                </button>
-
                 <!-- Wrapper for slides -->
-                <div class="carousel-inner" role="listbox">
+                <div id="ci1" class="carousel-inner" role="listbox">
 
                 <!-- Left and right controls -->
                 <a id="l" class="Left carousel-control" href="#myCarousel" role="button" data-slide="prev">
@@ -64,8 +72,23 @@
               </div>
             </div>
 
+            <div id="carousel2" style="float:right" class="carousel slide">
+              <!-- Wrapper for slides -->
+              <div id="ci2" class="carousel-inner" role="listbox">
+
+              <!-- Left and right controls -->
+              <a id="l2" class="Left carousel-control" href="#carousel2" role="button" data-slide="prev">
+                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+              </a>
+              <a id="r2" class="Right carousel-control" href="#carousel2" role="button" data-slide="next">
+                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+              </a>
+            </div>
+          </div>
+
               <script>
                 $("#myCarousel").carousel({interval: false});
+                $("#carousel2").carousel({interval: false});
               </script>
 
 
