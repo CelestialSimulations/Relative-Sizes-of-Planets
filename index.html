@@ -52,45 +52,45 @@
           <!-- where planet applications go -->
           <div id="planet_app">
 
-            <div id="planet_mass" style="position: relative;">
+            <div id="planet_mass">
 
-              <button id="drop_btn" style="margin-bottom:10px;" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
-                Drop
+              <button id="drop_btn1" style="margin-bottom:10px;" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                Drop1
               </button>
 
-              <div id="myCarousel" class="carousel slide">
-                <!-- Wrapper for slides -->
-                <div id="ci1" class="carousel-inner" role="listbox">
+              <button id="drop_btn2" style="margin-bottom:10px;" type="button" class="btn btn-primary" data-toggle="button" aria-pressed="false" autocomplete="off">
+                Drop2
+              </button>
 
-                <!-- Left and right controls -->
-                <a id="l" class="Left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-                  <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-                </a>
-                <a id="r" class="Right carousel-control" href="#myCarousel" role="button" data-slide="next">
-                  <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-                </a>
+              <div style="position: relative;">
+                <div id="myCarousel" style="position: absolute; left: 0;" class="carousel slide">
+                  <!-- Wrapper for slides -->
+                  <div id="ci1" class="carousel-inner" role="listbox">
+
+                    <!-- Left and right controls -->
+                    <a id="l" class="Left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+                      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    </a>
+                    <a id="r" class="Right carousel-control" href="#myCarousel" role="button" data-slide="next">
+                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    </a>
+                  </div>
+                </div>
+
+                <div id="carousel2" style="position: absolute; right: 0;" class="carousel slide">
+                  <!-- Wrapper for slides -->
+                  <div id="ci2" class="carousel-inner" role="listbox">
+
+                    <!-- Left and right controls -->
+                    <a id="l2" class="Left carousel-control" href="#carousel2" role="button" data-slide="prev">
+                      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+                    </a>
+                    <a id="r2" class="Right carousel-control" href="#carousel2" role="button" data-slide="next">
+                      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+                    </a>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <div id="carousel2" style="float:right" class="carousel slide">
-              <!-- Wrapper for slides -->
-              <div id="ci2" class="carousel-inner" role="listbox">
-
-              <!-- Left and right controls -->
-              <a id="l2" class="Left carousel-control" href="#carousel2" role="button" data-slide="prev">
-                <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-              </a>
-              <a id="r2" class="Right carousel-control" href="#carousel2" role="button" data-slide="next">
-                <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-              </a>
-            </div>
-          </div>
-
-              <script>
-                $("#myCarousel").carousel({interval: false});
-                $("#carousel2").carousel({interval: false});
-              </script>
-
 
             </div>
 
@@ -136,6 +136,10 @@
           </div>
 
           <!--<svg class="chart"></svg>-->
+          <script>
+            $("#myCarousel").carousel({interval: false});
+            $("#carousel2").carousel({interval: false});
+          </script>
 
 
     </body>

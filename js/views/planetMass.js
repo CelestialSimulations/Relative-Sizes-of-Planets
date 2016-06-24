@@ -4,7 +4,8 @@ define([
     'jqueryui',
     'd3',
     'backbone',
-    'js/models/planetModel'
+    'js/models/planetModel',
+    'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
     //'slick/slick.min.js'
     //'earth'
 ], function($, $ui, d3, backbone, planetModel) {
@@ -41,15 +42,21 @@ define([
     },
 
     activate_mass_sim: function() {
+      //if(d3.select("#planet_diameter").attr("display","inline")){
       $("#mass").click(function(){
         $("#planet_mass").toggle("fade", 300);
         $("#planet_diameter").toggle("fade", 300);
       });
+    //}
     },
 
     draw_planets: function() {
 
-      this.active_planet = d3.select("#ci1")
+      //$("#myCarousel").carousel({interval: false});
+      //$("#carousel2").carousel({interval: false});
+
+
+      /*this.active_planet = d3.select("#ci1")
                               //.data(this.model.get("data"))
                            //.enter()
                               .append("div")
@@ -57,7 +64,9 @@ define([
                               .append("img")
                                 .attr("width","100px")
                                 .attr("height", "100px")
-                                .attr("src","PlanetSVGs/Mercury.svg");
+                                .attr("src","PlanetSVGs/Mercury.svg");*/
+
+      //d3.select("#Mercury_div_1").attr("class","active");
 
       this.passive_planets = d3.select("#ci1").selectAll()
                          .data(this.model.get("data"))
@@ -67,13 +76,16 @@ define([
                             .attr("id",function(d) { return d.name+"_div_1";})
                             //.attr("class","svgs")
                          .append("img")
+                            .attr("class","img-circle")
                             //.attr("id",function(d) { return d.name+"_img";})
                             //.style("margin-top", function(d) { return d.mass/3-200+"px";})
                             .attr("width","100px")
                             .attr("height", "100px")
                             .attr("src", function(d) { return "PlanetSVGs/"+d.name+".svg";});
 
-      this.active_planet_2 = d3.select("#ci2")
+      d3.select("#Mercury_div_1").attr("class","item active");
+
+      /*this.active_planet_2 = d3.select("#ci2")
                               //.data(this.model.get("data"))
                            //.enter()
                               .append("div")
@@ -81,7 +93,7 @@ define([
                               .append("img")
                                 .attr("width","100px")
                                 .attr("height", "100px")
-                                .attr("src","PlanetSVGs/Mercury.svg");
+                                .attr("src","PlanetSVGs/Mercury.svg");*/
 
       this.passive_planets_2 = d3.select("#ci2").selectAll()
                          .data(this.model.get("data"))
@@ -91,17 +103,24 @@ define([
                             .attr("id",function(d) { return d.name+"_div_2";})
                             //.attr("class","svgs")
                          .append("img")
+                            .attr("class","img-circle")
                             //.attr("id",function(d) { return d.name+"_img";})
                             //.style("margin-top", function(d) { return d.mass/3-200+"px";})
                             .attr("width","100px")
                             .attr("height", "100px")
                             .attr("src", function(d) { return "PlanetSVGs/"+d.name+".svg";});
 
+      d3.select("#Mercury_div_2").attr("class","item active");
+
 
       var plut = $('div.item').has('[src="PlanetSVGs/Pluto.svg"]');
 
       $("#l, #r").insertAfter("#Pluto_div_1");
       $("#l2, #r2").insertAfter("#Pluto_div_2");
+
+      $("#myCarousel").carousel({interval: false});
+      $("#carousel2").carousel({interval: false});
+
 
       /*this.planet1 = d3.select("#mass_planet_svgs").selectAll()
                          .data(this.model.get("data"))
@@ -122,44 +141,90 @@ define([
 
     planet_drop: function() {
       var scope = this;
-      $("#drop_btn").click(function() {
-        //for( var i = 0; i < scope.model.get("data").length; i++ ) {
 
-
-          //$("#Pluto_div").addClass("active");
-          //var
+      //this.weight_1;
+      //this.weight_2;
+      $("#drop_btn1").click(function() {
 
           $("#ci1 div.active img").attr("class","original1").clone().attr("class","copy1").appendTo("#ci1 div.active");
           $(".original1").insertAfter("#myCarousel");//.addClass("dropped");//.insertAfter("#l");
           //$(".dropped").clone().appendTo("div.active");
           //$("div.active").toggle();
 
-          $("#ci2 div.active img").attr("class","original2").clone().attr("class","copy2").appendTo("#ci2 div.active");
-          $(".original2").insertAfter("#myCarousel");
+          //var oriattr = $(".original1").prop("attributes");
+          //$.each(oriattr, function(){
+            //$(".copy1").attr(this.__data__);
+          //});
+
+
+
+          //this.weight_1 = $(".original1")[0].__data__.mass;
+
+          d3.select(".original1, .original2").attr("id",function(d){
+            console.log(d.mass); return "1";
+          });
+
+
+          //console.log("S1: "+($(".original1")[0].__data__.mass-$(".original2")[0].__data__.mass)+" S2: "+(this.weight_2-this.weight_1)/2);
 
         //for( var i = 0; i < scope.model.get("data").length; i++ ) {
           //console.log(scope.model.get("data")[i].mass);
-          d3.select(".original1").transition().duration(1000)
-                .style("position", "absolute")
-                //.attr("width",function (d){return d.diameter/400+"px"})
-                //.attr("height",function (d){return d.diameter/400+"px"})
-                //.style("margin-left",function(d){return -d.diameter/800+50+"px"})
-                .style("margin-bottom", "100px")
-                .style("margin-top", function(d){return d.mass/*+d.diameter/800*/+300+"px";});///*scope.model.get("data")[i].mass/3+"px"*/);
 
-          d3.select(".original2").transition().duration(1000)
-                .style("position", "absolute")
+          //d3.select(".original1").transition().duration(1000)
+            //      .style("margin-top","300px");
+          //d3.select(".original2").transition().duration(1000)
+            //      .style("margin-top","300px");
+
+          var o1 = d3.select(".original1").transition().duration(500)
+                .style("float","left")
+                //.style("margin-right",)
+                //function(d){console.log(d)}
+                //.style("position", "absolute")
                 //.attr("width",function (d){return d.diameter/400+"px"})
                 //.attr("height",function (d){return d.diameter/400+"px"})
                 //.style("margin-left",function(d){return -d.diameter/800+50+"px"})
-                .style("margin-bottom", "100px")
-                .style("margin-top", function(d){return d.mass/*+d.diameter/800*/+300+"px";});
+                .style("margin-top","300px")
+                //.style("margin-bottom", "100px")
+                .each("end",function(){
+                  d3.select(this).transition().duration(1500)
+                      .style("margin-top", 400/*+(weight_1-weight_2)*/+"px");
+                });
+                //.style("margin-top", 300+(weight_1-weight_2)/2+"px");///*scope.model.get("data")[i].mass/3+"px"*/);
+
         //}
         /*$('.item active')*///scope.planet1.transition().duration(/*function(d){return d.mass}*/300)
                   //.style("margin-top", function(d) { return d.mass/3+"px";});
+
+          //$("drop_btn").click([$(".original1"),$(".original2")],click_copy);
       });
 
-    }
+      $("#drop_btn2").click(function(){
+
+        $("#ci2 div.active img").attr("class","original2").clone().attr("class","copy2").appendTo("#ci2 div.active");
+        $(".original2").insertAfter("#carousel2");
+
+        //this.weight_2 = $(".original2")[0].__data__.mass;
+
+        var o2 = d3.select(".original2").transition().duration(1000)
+              .style("float","right")
+              .style("margin-top","300px")
+              //.style("margin-bottom", "100px")
+              .each("end",function(){
+                d3.select(this).transition().duration(1500)
+                    .style("margin-top", 400+/*(weight_2-weight_1)+*/"px");
+              });
+
+      });
+
+      //console.log(scope.weight_1);
+
+      /*var click_copy = function(c) {
+        console.log(c);
+      }*/
+
+      //click_copy();
+
+    },
 /*
     planet_sliding: function() {
       //$("#myCarousel").carousel({interval: false});

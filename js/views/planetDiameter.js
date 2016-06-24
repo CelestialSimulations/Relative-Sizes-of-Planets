@@ -109,7 +109,7 @@ define([
             .enter()
                 .append("img")
                     .attr("data-toggle", "tooltip")
-                    .attr("title", function(d) { return d.name; })
+                    .attr("title", function(d) { return d.name + ", Diameter: "+d.diameter; })
                     // the margin push the planet to be in the center of
                     // each other, and the absolute position allows that
                     .style("position", "absolute")
@@ -171,6 +171,8 @@ define([
             //.attr("select","selected")
             .attr("value", function(d){return d.name;})
             .text(function(d){return d.name});
+
+      //options.hover({})
 
       $("select").multiselect({
 
@@ -340,14 +342,14 @@ define([
     /***********************************************/
     //
     // size_slider takes advantage of the jQuery-ui slider
-    // widget to easily create a slider that changes the size
+    // widget to create a slider that changes the size
     // of the planets.
     //
     /***********************************************/
     size_slider: function() {
 
-      // This varible is to fix a scoping issue that comes with
-      // going too deep into functions...
+      // This varible is to fix a scoping issue that comes as
+      // a result of the slider function
       var scope = this;
       var interpolateRadius = d3.interpolate(2, 3);
 
@@ -361,6 +363,8 @@ define([
               step: .01,
               slide: function( event, ui ) {
                   $( "#amount" ).val( Math.floor(ui.value*100)+"%" );
+                  // Normally, planetImg would be called as this.planetImg, but that loses its
+                  // known value when it is inside more than one function
                   scope.planetImg.transition().duration(300)
                       .attr("width", function(d) { return interpolateRadius((d.diameter/400) * ui.value)+"px"; })
                       .attr("height", function(d) { return interpolateRadius((d.diameter/400) * ui.value)+"px"; })
