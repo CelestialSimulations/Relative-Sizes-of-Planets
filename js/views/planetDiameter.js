@@ -52,6 +52,8 @@ define([
 
       var letmeclosethistabfunction;
 
+      $.widget.bridge('uitooltip', $.ui.tooltip);
+
       /***********************************************/
       // This file uses data from external files.
       // this.model.get("data") calls to the planetModel.js file,
@@ -109,7 +111,7 @@ define([
             .enter()
                 .append("img")
                     .attr("data-toggle", "tooltip")
-                    .attr("title", function(d) { return d.name + ", Diameter: "+d.diameter; })
+                    .attr("title", function(d) { return d.name + ", " +"Diameter: "+(d.diameter*1000000).toLocaleString()+" km"; })
                     // the margin push the planet to be in the center of
                     // each other, and the absolute position allows that
                     .style("position", "absolute")
@@ -144,9 +146,11 @@ define([
                   console.log(dataSorted[1].diameter);*/
 
           //Additional features added easily with jQuery-ui.
-          //
+
+
+
           //.tooltip creates a tooltip for each planet
-          $('[data-toggle="tooltip"]').tooltip( {track: true} );
+          $('[data-toggle="tooltip"]').tooltip( );
           //.draggable makes the div containing the svgs draggable
           $("#planet_svgs").draggable();
 

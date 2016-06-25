@@ -160,8 +160,17 @@ define([
 
           //this.weight_1 = $(".original1")[0].__data__.mass;
 
-          d3.select(".original1, .original2").attr("id",function(d){
-            console.log(d.mass); return "1";
+
+
+          d3.select(".original1").attr("id",function(d){
+            var s2 = this;
+            //console.log(d.mass); return "1";
+            this.v1 = d.mass;
+            d3.select(".original2").attr("id", function(d){
+              this.v2 = d.mass;
+              //console.log(s2.v1 + ":" + this.v2);
+            });
+
           });
 
 
@@ -177,17 +186,26 @@ define([
 
           var o1 = d3.select(".original1").transition().duration(500)
                 .style("float","left")
-                //.style("margin-right",)
-                //function(d){console.log(d)}
-                //.style("position", "absolute")
-                //.attr("width",function (d){return d.diameter/400+"px"})
-                //.attr("height",function (d){return d.diameter/400+"px"})
-                //.style("margin-left",function(d){return -d.diameter/800+50+"px"})
                 .style("margin-top","300px")
                 //.style("margin-bottom", "100px")
                 .each("end",function(){
                   d3.select(this).transition().duration(1500)
-                      .style("margin-top", 400/*+(weight_1-weight_2)*/+"px");
+                      .style("margin-top", function(d) {
+                        var scope2 = this;
+                        this.v1 = d.mass;
+                        var second = d3.select(".original2").transition().duration(1500)
+                            .style("margin-top", function(d){
+                              this.v2 = d.mass;
+                              console.log(scope2.v1-this.v2);
+                              return this.v2-scope2.v1+300+"px";
+                        });
+                        var s = second[0][0] || 0;
+                        var sd = s.__data__ || 0;
+                        //console.log(second[0][0].__data__.mass);
+                        var m2 = sd.mass || 0;
+                        //m2 = m2 || 0;
+                        return this.v1-m2+300+"px";
+                      });
                 });
                 //.style("margin-top", 300+(weight_1-weight_2)/2+"px");///*scope.model.get("data")[i].mass/3+"px"*/);
 
@@ -211,7 +229,22 @@ define([
               //.style("margin-bottom", "100px")
               .each("end",function(){
                 d3.select(this).transition().duration(1500)
-                    .style("margin-top", 400+/*(weight_2-weight_1)+*/"px");
+                    .style("margin-top", function(d) {
+                      var scope2 = this;
+                      this.v1 = d.mass;
+                      var second = d3.select(".original1").transition().duration(1500)
+                          .style("margin-top", function(d){
+                            this.v2 = d.mass;
+                            console.log(scope2.v1-this.v2);
+                            return this.v2-scope2.v1+300+"px";
+                      });
+                      var s = second[0][0] || 0;
+                      var sd = s.__data__ || 0;
+                      //console.log(second[0][0].__data__.mass);
+                      var m2 = sd.mass || 0;
+                      //m2 = m2 || 0;
+                      return this.v1-m2+300+"px";
+                    });
               });
 
       });
