@@ -146,10 +146,20 @@ define([
       //this.weight_2;
       $("#drop_btn1").click(function() {
 
-          $("#ci1 div.active img").attr("class","original1").clone().attr("class","copy1").appendTo("#ci1 div.active");
+          $("#ci1 div.active img").attr("class","original1").clone(true).removeClass("original1").addClass("copy1").appendTo("#ci1 div.active");
           $(".original1").insertAfter("#myCarousel");//.addClass("dropped");//.insertAfter("#l");
           //$(".dropped").clone().appendTo("div.active");
           //$("div.active").toggle();
+
+          console.log(d3.select(".original1")[0][0].__data__);
+
+          d3.selectAll(".copy1").data([$(".original1")[0].__data__]);//.enter();
+
+          //console.log($(".copy1"));
+
+          //var copy = $.extend({}, ".copy1", $(".original1"));
+          //console.log(copy[0]);
+          //d3.select(".copy1").data(this.model.get("data"))
 
           //var oriattr = $(".original1").prop("attributes");
           //$.each(oriattr, function(){
@@ -160,29 +170,10 @@ define([
 
           //this.weight_1 = $(".original1")[0].__data__.mass;
 
+          //To Do:
+          // Work on selections
+          // Deep clone
 
-
-          d3.select(".original1").attr("id",function(d){
-            var s2 = this;
-            //console.log(d.mass); return "1";
-            this.v1 = d.mass;
-            d3.select(".original2").attr("id", function(d){
-              this.v2 = d.mass;
-              //console.log(s2.v1 + ":" + this.v2);
-            });
-
-          });
-
-
-          //console.log("S1: "+($(".original1")[0].__data__.mass-$(".original2")[0].__data__.mass)+" S2: "+(this.weight_2-this.weight_1)/2);
-
-        //for( var i = 0; i < scope.model.get("data").length; i++ ) {
-          //console.log(scope.model.get("data")[i].mass);
-
-          //d3.select(".original1").transition().duration(1000)
-            //      .style("margin-top","300px");
-          //d3.select(".original2").transition().duration(1000)
-            //      .style("margin-top","300px");
 
           var o1 = d3.select(".original1").transition().duration(500)
                 .style("float","left")
@@ -199,11 +190,11 @@ define([
                               console.log(scope2.v1-this.v2);
                               return this.v2-scope2.v1+300+"px";
                         });
+                        // I understand if you don't want to understand this.
                         var s = second[0][0] || 0;
                         var sd = s.__data__ || 0;
-                        //console.log(second[0][0].__data__.mass);
                         var m2 = sd.mass || 0;
-                        //m2 = m2 || 0;
+
                         return this.v1-m2+300+"px";
                       });
                 });
@@ -218,8 +209,10 @@ define([
 
       $("#drop_btn2").click(function(){
 
-        $("#ci2 div.active img").attr("class","original2").clone().attr("class","copy2").appendTo("#ci2 div.active");
+        $("#ci2 div.active img").attr("class","original2").clone(true).attr("class","copy2").appendTo("#ci2 div.active");
         $(".original2").insertAfter("#carousel2");
+
+        d3.selectAll(".copy2").data([$(".original2")[0].__data__]).enter();
 
         //this.weight_2 = $(".original2")[0].__data__.mass;
 
