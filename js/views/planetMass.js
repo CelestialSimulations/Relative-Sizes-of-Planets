@@ -45,8 +45,18 @@ define([
     activate_mass_sim: function() {
       //if(d3.select("#planet_diameter").attr("display","inline")){
       $("#mass").click(function(){
-        $("#planet_mass").toggle("fade", 300);
-        $("#planet_diameter").toggle("fade", 300);
+        //$("#planet_mass").show();
+        //$("#planet_diameter").hide();
+        d3.select("#planet_diameter").transition()
+              .style("opacity", "0")
+              .each("end",function(){
+                d3.select(this).style("display","none");
+              });
+        d3.select("#planet_mass").transition()
+              .style("opacity", "1")
+              .each("end",function(){
+                d3.select(this).style("display","inline");
+              });
       });
     //}
     },
@@ -114,7 +124,8 @@ define([
       //this.weight_2;
 
 
-      var pushIntoArray = [];
+      var pArray1DropBtn1 = [];
+      var pArray2DropBtn1 = [];
       //d3.select("#drop_btn1").data(this.model.get("data"));//.enter();
 
       d3.select("#drop_btn1").on("click", function() {
@@ -170,37 +181,44 @@ define([
                         var scope2 = this;
                         this.v1 = d.mass;
                         //d3.selectAll(".copy1").data(d);
-                        var second = d3.selectAll(".original2").transition().duration(1500)
+                        var second = d3.select(".original2").transition().duration(1500)
                             .style("margin-top", function(d){
                               this.v2 = d.mass;
-                              console.log(scope2.v1-this.v2);
-                              return this.v2-scope2.v1+300+"px";
+                              var v1 = scope2.v1 || 0;
+                              //console.log(scope2.v1-this.v2);
+                              pArray2DropBtn1.push(d.mass-v1);
+                              var sum = d3.sum(pArray2DropBtn1);
+                              //console.log(pArray2DropBtn1);
+                              //console.log(v1);
+                              d3.selectAll(".original2").attr("margin-top",sum+300);
+                              return sum+300+"px";
                         });
                         var s = second[0][0] || 0;
                         var sd = s.__data__ || 0;
                         var m2 = sd.mass || 0;
 
-                        pushIntoArray.push(d.mass);
-                        var sum = d3.sum(pushIntoArray);
-                        console.log(sum)
-                        console.log(pushIntoArray);
+                        pArray1DropBtn1.push(d.mass-m2);
+                        var sum = d3.sum(pArray1DropBtn1);
+                        //console.log(sum)
+                        //console.log(pArray1DropBtn1);
+                        d3.selectAll(".original1").attr("margin-top",sum+300);
 
-                        return sum-m2+300+"px";
+                        return sum+300+"px";
                       });
                 });
 
         //var generatedPlanetData = d3.select(".original1")[0][0].__data__.mass;
 
-        //pushIntoArray.push(generatedPlanetData);
+        //pArray1DropBtn1.push(generatedPlanetData);
 
-        //d3.sum(pushIntoArray);
+        //d3.sum(pArray1DropBtn1);
 
         //once get array of mass data that adds to itself when drop btn clicked
         //use d3.sum and add that variable to the above ^
 
         //console.log(generatedPlanetData);
-        //console.log(pushIntoArray);
-        //console.log(d3.sum(pushIntoArray));
+        //console.log(pArray1DropBtn1);
+        //console.log(d3.sum(pArray1DropBtn1));
                 //.style("margin-top", 300+(weight_1-weight_2)/2+"px");///*scope.model.get("data")[i].mass/3+"px"*/);
 
         //}
@@ -210,12 +228,15 @@ define([
           //$("drop_btn").click([$(".original1"),$(".original2")],click_copy);
       });
 
+      var pArray1DropBtn2 = [];
+      var pArray2DropBtn2 = [];
+
       $("#drop_btn2").click(function(){
 
         $("#ci2 div.active img").addClass("original2").removeClass("copy2").clone(true).attr("class","copy2").appendTo("#ci2 div.active");
         $("#img_holder2").append($(".original2"));
 
-        console.log(d3.select(".original2")[0][0].__data__);
+        //console.log(d3.select(".original2")[0][0].__data__);
 
         d3.selectAll(".copy2").data([$(".original2")[0].__data__]);
 
@@ -226,22 +247,34 @@ define([
               .style("margin-top","300px")
               //.style("margin-bottom", "100px")
               .each("end",function(){
-                d3.select(this).transition().duration(1500)
+                d3.select(".original2").transition().duration(1500)
                     .style("margin-top", function(d) {
                       var scope2 = this;
                       this.v1 = d.mass;
                       var second = d3.select(".original1").transition().duration(1500)
                           .style("margin-top", function(d){
                             this.v2 = d.mass;
-                            console.log(scope2.v1-this.v2);
-                            return this.v2-scope2.v1+300+"px";
+                            var v1 = scope2.v1 || 0;
+
+                            pArray2DropBtn2.push(d.mass-v1);
+                            var sum = d3.sum(pArray2DropBtn2);
+                            //console.log(scope2.v1-this.v2);
+                            d3.selectAll(".original1").attr("margin-top",sum+300);
+                            return sum+300+"px";
                       });
                       var s = second[0][0] || 0;
                       var sd = s.__data__ || 0;
                       //console.log(second[0][0].__data__.mass);
                       var m2 = sd.mass || 0;
                       //m2 = m2 || 0;
-                      return this.v1-m2+300+"px";
+
+                      pArray1DropBtn2.push(d.mass-m2);
+                      var sum = d3.sum(pArray1DropBtn2);
+                      //console.log(sum)
+                      //console.log(pArray1DropBtn2);
+                      d3.selectAll(".original2").attr("margin-top",sum+300);
+
+                      return sum+300+"px";
                     });
               });
 
