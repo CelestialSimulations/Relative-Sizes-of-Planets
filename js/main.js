@@ -24,6 +24,7 @@ requirejs([
 ],function($, d3, planetModel, planetMass, planetDiameter) {
 
         var planetData =  {"data":[
+        {name: "Sun",	           mass: 1988500,     diameter: 1392000,     distance: 0,            color: "yellow"},
         {name: "Mercury",	       mass: 0.330,       diameter: 4879,        distance: 57.9,         color: "gray"},
         {name: "Venus",	         mass: 4.87,        diameter: 12104,       distance: 108.2,        color: "pink"},
         {name: "Earth",      	   mass: 5.97,        diameter: 12756,       distance: 149.6,        color: "green"},
