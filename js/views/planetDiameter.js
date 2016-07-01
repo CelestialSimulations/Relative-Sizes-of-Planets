@@ -37,12 +37,12 @@ define([
         // allows the user to see the simulation since it is
         // applying style="display: inline", which shows the div
         //$("#planet_diameter").show("fade",300);
-        d3.select("#planet_diameter").transition()
+        d3.select("#planet_diameter").transition().duration(500)
               .style("opacity", "1")
               .each("end",function(){
                 d3.select(this).style("display","inline");
               });
-        d3.select("#planet_mass").transition()
+        d3.select("#planet_mass").transition().duration(500)
               .style("opacity", "0")
               .each("end",function(){
                 d3.select(this).style("display","none");
