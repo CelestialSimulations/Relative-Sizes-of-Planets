@@ -2,7 +2,6 @@
 <html>
     <!-- Header where scripts and stylesheets are called -->
     <head>
-      <meta charset="UTF-8">
         <!-- Calls to CSS Stylesheets -->
         <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link href="css/main.css" rel="stylesheet" type="text/css">
@@ -38,19 +37,65 @@
 
         <div class="page-header">
           <h1>Relative Size of Planets <small>Simulations</small>
+
+            <button type="button" style="float: right; margin-left: 10px;" class="btn btn-default" data-toggle="modal" data-target="#myModal">
+              <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+            </button>
+
             <div style="float: right;" class="btn-group" data-toggle="buttons">
               <label id="mass" class="btn btn-primary active">
-                <input type="radio" name="options" autocomplete="off" checked> Mass Simulation
+                <input type="radio" name="options" autocomplete="off" checked> Mass
               </label>
               <label id="diameter" class="btn btn-primary">
-                <input type="radio" name="options" autocomplete="off"> Diameter Simulation
+                <input type="radio" name="options" autocomplete="off"> Diameter
+              </label>
+              <label id="surface_area" class="btn btn-primary">
+                <input type="radio" name="options" autocomplete="off"> Surface Area
               </label>
             </div>
+
           </h1>
         </div>
 
           <!-- where planet applications go -->
           <div id="planet_app">
+
+            <div id="planet_add">
+
+              <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      <h4 class="modal-title" id="myModalLabel">Add Planet</h4>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="input-group">
+                          <span class="input-group-addon" id="basic-addon1">Name</span>
+                          <input type="text" id="new_name_getter" class="form-control" placeholder="New planet name" aria-describedby="basic-addon1">
+                        </div>
+
+                        <div class="input-group" style="margin-top: 10px;">
+                          <span class="input-group-addon" id="basic-addon2">Mass</span>
+                          <input type="number" id="new_mass_getter" class="form-control" placeholder="Units of lbs" aria-describedby="basic-addon2">
+                        </div>
+
+                        <div class="input-group" style="margin-top: 10px;">
+                          <span class="input-group-addon" id="basic-addon3">Diameter</span>
+                          <input type="number" id="new_diameter_getter" class="form-control" placeholder="Units of km" aria-describedby="basic-addon3">
+                        </div>
+
+                    </div>
+                    <div class="modal-footer">
+                      <button id="close_btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                      <button id="save_btn" type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
             <div id="planet_mass">
 
@@ -76,7 +121,7 @@
                     </a>
                   </div>
                 </div>
-                <div id="img_holder1" style="width: 400px"></div>
+                <div id="img_holder1" style="position: relative; float: left; width: 400px"></div>
 
                 <div id="carousel2" style="position: absolute; right: 0;" class="carousel slide">
                   <!-- Wrapper for slides -->
@@ -91,8 +136,28 @@
                     </a>
                   </div>
                 </div>
+                <div id="img_holder2" style="position: relative; float: right; width: 400px;"></div>
+
+                <svg version="1.1" height="600px" width="400px"  xmlns="http://www.w3.org/2000/svg" >
+                      <clipPath id="cut-off-bottom">
+                          <rect id="rweight" x="0" y="400" width="400" height="100" />
+                      </clipPath>
+
+                      <ellipse id="cweight" cx="200" cy="400" rx="200" ry="50" clip-path="url(#cut-off-bottom)" />
+                </svg>
+
+
               </div>
-              <div id="img_holder2"></div>
+
+              <!--<div width="400px" height="50px">
+              <svg width="100%" height="100%" viewBox="0 0 1207 511">
+                  <g transform="matrix(2.48866,0,0,1.05232,-540.039,-72.61)">
+                      <path d="M217,311.5C217,445.429 325.571,554 459.5,554C593.429,554 702,445.429 702,311.5L217,311.5Z" style="fill:black;"/>
+                  </g>
+              </svg>
+            </div>-->
+
+              <!--<div class="weight_styling" id="planet_holder1" style="margin-top: 400px;"></div>-->
 
             </div>
 
@@ -123,6 +188,18 @@
               </div>
 
             </div>
+
+            <div id="planet_surface_area" style="display: none;">
+
+              <div id="subdivision">
+                <input id="#subin" type="range" min="1" max="12" value="8">
+                <output id="#subout" name="subdivision"></output>
+              </div>
+
+              <div id="geodesic_holder"></div>
+
+            </div>
+
 
               <!--<script type="text/javascript">
               //$("embed-css").html()

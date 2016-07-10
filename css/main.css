@@ -4,8 +4,37 @@ Add main CSS here
 
 */
 
-#circle_jupiter {
-  fill: blue;
+path {
+  fill: none;
+  stroke: #000;
+}
+
+path:hover {
+  stroke: red;
+}
+
+circle {
+  fill: none;
+  stroke: #000;
+  stroke-width: 3px;
+}
+
+#subdivision {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+}
+
+#subdivision input {
+  width: 200px;
+}
+
+.weight_styling {
+  width: 400px;
+  height: 100px;
+  background-color: black;
+  border-bottom-left-radius: 400px;
+  border-bottom-right-radius: 400px;
 }
 
 img:hover {

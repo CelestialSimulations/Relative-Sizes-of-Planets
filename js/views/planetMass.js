@@ -5,14 +5,17 @@ define([
     'd3',
     'backbone',
     'js/models/planetModel',
+    'js/views/addPlanet',
     'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
     //'slick/slick.min.js'
     //'earth'
-], function($, $ui, d3, backbone, planetModel) {
+], function($, $ui, d3, backbone, planetModel, addPlanetData) {
 
   var planetView = backbone.View.extend({
 
     initialize: function() {
+
+      //console.log(addPlanetData);
 
       this.activate_mass_sim();
       this.draw_planets();
@@ -45,9 +48,10 @@ define([
     activate_mass_sim: function() {
       //if(d3.select("#planet_diameter").attr("display","inline")){
       $("#mass").click(function(){
-        //$("#planet_mass").show();
-        //$("#planet_diameter").hide();
-        d3.select("#planet_diameter").transition().duration(500)
+        $("#planet_mass").show();
+        $("#planet_diameter").hide();
+        $("#planet_surface_area").hide();
+        /*d3.select("#planet_diameter").transition().duration(500)
               .style("opacity", "0")
               .each("end",function(){
                 d3.select(this).style("display","none");
@@ -56,12 +60,13 @@ define([
               .style("opacity", "1")
               .each("end",function(){
                 d3.select(this).style("display","inline");
-              });
+              });*/
       });
     //}
     },
 
     draw_planets: function() {
+      //console.log(this.model.get("data"));
 
       var pData = this.model.get("data");
 
@@ -77,6 +82,7 @@ define([
                             //.attr("class","svgs")
                          .append("img")
                             .attr("class","img-circle")
+                            //.style("position","absolute")
                             //.attr("id",function(d) { return d.name+"_img";})
                             //.style("margin-top", function(d) { return d.mass/3-200+"px";})
                             .attr("width","100px")
@@ -95,6 +101,7 @@ define([
                             //.attr("class","svgs")
                          .append("img")
                             .attr("class","img-circle")
+                            //.style("position","absolute")
                             //.attr("id",function(d) { return d.name+"_img";})
                             //.style("margin-top", function(d) { return d.mass/3-200+"px";})
                             .attr("width","100px")
@@ -111,6 +118,8 @@ define([
       $("#l, #r").insertAfter("#"+last_planet+"_div_1");
       $("#l2, #r2").insertAfter("#"+last_planet+"_div_2");
 
+      //$("#planet_holder1").insertAfter("img");
+
       $("#myCarousel").carousel({interval: false});
       $("#carousel2").carousel({interval: false});
 
@@ -123,6 +132,8 @@ define([
       var pArray1DropBtn1 = [];
       var pArray1DropBtn2 = [];
 
+      //make asteroid program w/ d3
+
       d3.select("#drop_btn1").on("click", function() {
 
           $("#ci1 div.active img").addClass("original1").removeClass("copy1").clone(true).removeClass("original1").addClass("copy1").appendTo("#ci1 div.active");
@@ -130,40 +141,81 @@ define([
 
           d3.selectAll(".copy1").data([d3.selectAll(".original1")[0][0].__data__]);
 
+          var o1 = d3.select(".original1").on("click", function(d, i){
 
-          var o1 = d3.select(".original1").on("click", function(d){
-            d3.select(this).transition().duration(300)
-                  .style("opacity", "0")
-                  .remove();
+                  pArray1DropBtn1.splice(i, 1);
 
-                  console.log(d)
+                  d3.selectAll(".original1").transition().duration(700)
+                        //.style("margin-left",function(d, i){
+                          //d3.select(this).transition().duration(700).style("margin-left", i*100+"px");
+                        //  return i*100+"px";
+                        //})
+                        .style("margin-top", d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2)+300+"px");
+
+                  d3.selectAll(".original2").transition().duration(700)
+                        .style("margin-top", d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1)+300+"px");
+
+                  d3.select(this).transition().duration(300)
+                        //.style("margin-left",function(d, i){
+                        //  return (i)*100+"px";
+                        //})
+                        //.style("margin-left", "0px")
+                        .style("opacity", "0")
+                        .remove();
+                        //.exit();
+
+                  //var index = pArray1DropBtn1.indexOf(d.mass);
+                  //if (index > -1) {
+                      //pArray1DropBtn1.splice(i, 1);
+                  //}
+
+                  //console.log(index)
                 })
-          .transition().duration(500)
+                /*.on("mouseover", function(){
+                  d3.select(this).transition().style("margin-left","-5px").attr("width","110px").attr("height","110px");
+                })
+                .on("mouseout", function(){
+                  d3.select(this).transition().style("margin-left","0px").attr("width","100px").attr("height","100px");
+                })*/
+          .transition().duration(300)
                 .style("float","left")
+                .style("position","absolute")
                 .style("margin-top","300px")
                 .each("end",function(){
                   d3.select(".original1").transition().duration(1500)
+                      //.style("margin-left",function(i){
+                      //  return -i*10+"px";
+                      //})
                       .style("margin-top", function(d) {
 
                         pArray1DropBtn1.push(d.mass);
-
-                        var second = d3.select(".original2").transition().duration(1500)
-                            .style("margin-top", function(d){
-
-                              var sum = d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1);
-
-                              d3.selectAll(".original2").transition().duration(1500)
-                                      .style("margin-top",sum+300+"px");
-
-                              return sum+300+"px";
-                        });
-
-                        var sum = d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2);
+                        var weight = d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2);
 
                         d3.selectAll(".original1").transition().duration(1500)
-                              .style("margin-top",sum+300+"px");
+                              .style("width", "90px")
+                              .style("margin-left",function(d, i){
+                                //console.log(i);
+                                return i*90+"px";
+                              })
 
-                        return sum+300+"px";
+                              .style("margin-top",weight+305+"px");
+
+                        d3.select(".original2").transition().duration(1500)
+                            .style("margin-top", function(d){
+
+                              var weight = d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1);
+
+                              d3.selectAll(".original2").transition().duration(1500)
+                                      .style("margin-top",weight+300+"px");
+
+                              return weight+300+"px";
+                        });
+                        d3.select("#rweight").transition().duration(1500)
+                              .attr("y",weight+400);
+                        d3.select("#cweight").transition().duration(1500)
+                              .attr("cy", weight+400);
+
+                        return weight+300+"px";
                       });
                 });
       });
@@ -183,29 +235,34 @@ define([
               })
           .transition().duration(1000)
               .style("float","right")
+              .style("position","absolute")
               .style("margin-top","300px")
               .each("end",function(){
                 d3.select(".original2").transition().duration(1500)
                     .style("margin-top", function(d) {
                       pArray1DropBtn2.push(d.mass);
 
-                      var second = d3.select(".original1").transition().duration(1500)
+                      d3.select(".original1").transition().duration(1500)
                           .style("margin-top", function(d){
 
-                            var sum = d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2);
+                            var weight = d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2);
 
                             d3.selectAll(".original1").transition().duration(1500)
-                                    .style("margin-top",sum+300+"px");
+                                    .style("margin-top",weight+300+"px");
 
-                            return sum+300+"px";
+                            return weight+300+"px";
                       });
 
-                      var sum = d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1);//-d3.sum(p3);
+                      var weight = d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1);//-d3.sum(p3);
 
                       d3.selectAll(".original2").transition().duration(1500)
-                              .style("margin-top",sum+300+"px");
+                              .style("margin-left",function(d, i){
+                                console.log(i);
+                                return i*100+"px";
+                              })
+                              .style("margin-top",weight+300+"px");
 
-                      return sum+300+"px";
+                      return weight+300+"px";
                     });
               });
 

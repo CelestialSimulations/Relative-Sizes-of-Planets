@@ -20,8 +20,10 @@ requirejs([
     'd3',
     'js/models/planetModel',
     'js/views/planetMass',
-    'js/views/planetDiameter'
-],function($, d3, planetModel, planetMass, planetDiameter) {
+    'js/views/planetDiameter',
+    'js/views/addPlanet',
+    'js/views/planetSurfaceArea'
+],function($, d3, planetModel, planetMass, planetDiameter, addPlanet, planetSurfaceArea) {
 
         var planetData =  {"data":[
         {name: "Sun",	           mass: 1988500,     diameter: 1392000,     distance: 0,            color: "yellow"},
@@ -37,12 +39,34 @@ requirejs([
         {name: "Pluto",    	     mass: 0.0146,      diameter: 2370,        distance: 5906.4,       color: "black"}]
         };
 
-      this.planet_model = new planetModel (planetData);
+        //var scope = this;
 
-      //$("#mass").click(function() {
-        this.planet_mass_sim = new planetMass( { "model" : this.planet_model } );
-        //return this.planet_mass_sim;
-      //});
+        /*var alteredData = planetData;
+
+        d3.select("#save_btn").on("click", function() {
+          var newName = $("#new_name_getter").val();
+          var newMass = $("#new_mass_getter").val();
+          var newDiameter = $("#new_diameter_getter").val();
+
+          console.log("N: "+newName);
+          console.log("M: "+$("#new_mass_getter").val());
+          console.log("D: "+$("#new_diameter_getter").val());
+
+          var newObject = {"name": newName, "mass": newMass, "diameter": newDiameter};
+          //console.log(newObject.name);
+
+          planetData.push(newObject);
+          console.log(planetData);
+        });*/
+
+      this.planet_model = new planetModel (planetData);
+      //console.log(this.planet_model);
+
+      this.add_planet_function = new addPlanet( { "model" : this.planet_model} );
+
+      this.planet_surface_area_sim = new planetSurfaceArea( { "model": this.planet_model } );
+
+      this.planet_mass_sim = new planetMass( { "model" : this.planet_model } );
       this.planet_diameter_sim = new planetDiameter( { "model" : this.planet_model } );
 
 
