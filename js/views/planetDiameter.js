@@ -39,6 +39,7 @@ define([
         $("#planet_diameter").show();
         $("#planet_mass").hide();
         $("#planet_surface_area").hide();
+        $("#planet_volume").hide();
         /*d3.select("#planet_diameter").transition().duration(500)
               .style("opacity", "1")
               .each("end",function(){

@@ -22,8 +22,9 @@ requirejs([
     'js/views/planetMass',
     'js/views/planetDiameter',
     'js/views/addPlanet',
-    'js/views/planetSurfaceArea'
-],function($, d3, planetModel, planetMass, planetDiameter, addPlanet, planetSurfaceArea) {
+    'js/views/planetSurfaceArea',
+    'js/views/planetVolume'
+],function($, d3, planetModel, planetMass, planetDiameter, addPlanet, planetSurfaceArea, planetVolume) {
 
         var planetData =  {"data":[
         {name: "Sun",	           mass: 1988500,     diameter: 1392000,     distance: 0,            color: "yellow"},
@@ -65,6 +66,8 @@ requirejs([
       this.add_planet_function = new addPlanet( { "model" : this.planet_model} );
 
       this.planet_surface_area_sim = new planetSurfaceArea( { "model": this.planet_model } );
+
+      this.planet_volume_sim = new planetVolume( { "model": this.planet_model } );
 
       this.planet_mass_sim = new planetMass( { "model" : this.planet_model } );
       this.planet_diameter_sim = new planetDiameter( { "model" : this.planet_model } );

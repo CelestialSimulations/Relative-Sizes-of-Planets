@@ -51,6 +51,7 @@ define([
         $("#planet_mass").show();
         $("#planet_diameter").hide();
         $("#planet_surface_area").hide();
+        $("#planet_volume").hide();
         /*d3.select("#planet_diameter").transition().duration(500)
               .style("opacity", "0")
               .each("end",function(){
@@ -177,10 +178,10 @@ define([
                 .on("mouseout", function(){
                   d3.select(this).transition().style("margin-left","0px").attr("width","100px").attr("height","100px");
                 })*/
-          .transition().duration(300)
+          .transition().duration(300).ease("linear")
                 .style("float","left")
                 .style("position","absolute")
-                .style("margin-top","300px")
+                .style("margin-top","305px")
                 .each("end",function(){
                   d3.select(".original1").transition().duration(1500)
                       //.style("margin-left",function(i){
@@ -192,13 +193,14 @@ define([
                         var weight = d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2);
 
                         d3.selectAll(".original1").transition().duration(1500)
-                              .style("width", "90px")
+                              .style("width", "80px")//function(d,i){
+                                //return (60-(i*30))+20+"px";
+                              //})
                               .style("margin-left",function(d, i){
                                 //console.log(i);
-                                return i*90+"px";
+                                return i*80+"px";
                               })
-
-                              .style("margin-top",weight+305+"px");
+                              .style("margin-top",weight+315+"px");
 
                         d3.select(".original2").transition().duration(1500)
                             .style("margin-top", function(d){
@@ -206,16 +208,21 @@ define([
                               var weight = d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1);
 
                               d3.selectAll(".original2").transition().duration(1500)
-                                      .style("margin-top",weight+300+"px");
+                                      .style("margin-top",weight+315+"px");
 
-                              return weight+300+"px";
+                              d3.select("#w2").transition().duration(1500)
+                                      .style("top",weight+"px");
+
+                              return weight+315+"px";
                         });
-                        d3.select("#rweight").transition().duration(1500)
-                              .attr("y",weight+400);
-                        d3.select("#cweight").transition().duration(1500)
-                              .attr("cy", weight+400);
 
-                        return weight+300+"px";
+                        d3.select("#w1").transition().duration(1500)
+                              .style("top",weight+"px")
+                              //.attr("y",weight+400);
+                        //d3.select("#cweight").transition().duration(1500)
+                        //      .attr("cy", weight+400);
+
+                        return weight+315+"px";
                       });
                 });
       });
@@ -236,8 +243,9 @@ define([
           .transition().duration(1000)
               .style("float","right")
               .style("position","absolute")
-              .style("margin-top","300px")
+              .style("margin-top","305px")
               .each("end",function(){
+
                 d3.select(".original2").transition().duration(1500)
                     .style("margin-top", function(d) {
                       pArray1DropBtn2.push(d.mass);
@@ -248,21 +256,28 @@ define([
                             var weight = d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2);
 
                             d3.selectAll(".original1").transition().duration(1500)
-                                    .style("margin-top",weight+300+"px");
+                                    .style("margin-top",weight+315+"px");
 
-                            return weight+300+"px";
+                            d3.select("#w1").transition().duration(1500)
+                                    .style("top",weight+"px");
+
+                            return weight+315+"px";
                       });
 
                       var weight = d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1);//-d3.sum(p3);
 
                       d3.selectAll(".original2").transition().duration(1500)
+                              .style("width", "80px")
                               .style("margin-left",function(d, i){
                                 console.log(i);
-                                return i*100+"px";
+                                return i*80+"px";
                               })
-                              .style("margin-top",weight+300+"px");
+                              .style("margin-top",weight+315+"px");
 
-                      return weight+300+"px";
+                      d3.select("#w2").transition().duration(1500)
+                              .style("top",weight+"px");
+
+                      return weight+315+"px";
                     });
               });
 
