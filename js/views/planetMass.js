@@ -69,6 +69,8 @@ define([
     draw_planets: function() {
       //console.log(this.model.get("data"));
 
+      d3.select("#rot").style("transform-origin","360px 108px");
+
       var pData = this.model.get("data");
 
       this.passive_planets = d3.select("#ci1").selectAll()
@@ -217,7 +219,23 @@ define([
                         });
 
                         d3.select("#w1").transition().duration(1500)
-                              .style("top",weight+"px")
+                            //  .style("left",weight/10+"px")
+                              .style("top",weight+"px");
+
+                        var element = document.getElementById('w1');
+
+                      	var originx = element.getBoundingClientRect().left;// + 360;
+                      	var originy = element.getBoundingClientRect().top + 108;
+
+                        var angle = -Math.atan2(weight, originx);//+Math.PI/5;
+                        var degangle = (angle*(180/Math.PI));
+
+                        console.log(degangle);
+                        //console.log(originx);
+
+                        d3.select("#rot").transition().duration(1500)
+                                .style("transform","rotate("+degangle+"deg)");
+
                               //.attr("y",weight+400);
                         //d3.select("#cweight").transition().duration(1500)
                         //      .attr("cy", weight+400);

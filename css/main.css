@@ -4,6 +4,10 @@ Add main CSS here
 
 */
 
+#rot {
+  /*transform-origin: 0px 0px;*/
+}
+
 #projection-menu {
   position: absolute;
   right: 10px;
