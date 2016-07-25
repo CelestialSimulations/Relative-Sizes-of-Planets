@@ -67,9 +67,17 @@ define([
     },
 
     draw_planets: function() {
+
+      var test = function() {
+        console.log("again");
+        d3.select("body").on("mouseover", function(){
+          test();
+        });
+      }
+      //test();
       //console.log(this.model.get("data"));
 
-      d3.select("#rot").style("transform-origin","360px 108px");
+      //d3.select("#rot").style("transform-origin","360px 108px");
 
       var pData = this.model.get("data");
 
@@ -135,9 +143,19 @@ define([
       var pArray1DropBtn1 = [];
       var pArray1DropBtn2 = [];
 
+      var weights = [0, 0];
+      var angles = [0, 0];
+
+      if(angles.length > 2) {
+        angles.shift();
+      }
+      //console.log(weights[1]);
+
       //make asteroid program w/ d3
 
       d3.select("#drop_btn1").on("click", function() {
+
+        $("#rot").attr("style", "transform-origin: 360px 108px; transform: rotate("+angles[1]+"deg); position: absolute; width: 720px;");
 
           $("#ci1 div.active img").addClass("original1").removeClass("copy1").clone(true).removeClass("original1").addClass("copy1").appendTo("#ci1 div.active");
           $("#img_holder1").append($(".original1"));
@@ -183,7 +201,13 @@ define([
           .transition().duration(300).ease("linear")
                 .style("float","left")
                 .style("position","absolute")
-                .style("margin-top","305px")
+                .style("margin-top",function(){
+                  if(weights.length > 2) {
+                    weights.shift();
+                  }
+                  console.log(weights[1]);
+                  return weights[1]+305+"px";
+                })
                 .each("end",function(){
                   d3.select(".original1").transition().duration(1500)
                       //.style("margin-left",function(i){
@@ -193,6 +217,12 @@ define([
 
                         pArray1DropBtn1.push(d.mass);
                         var weight = d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2);
+
+                        weights.push(weight);
+
+                        //console.log(weights);
+
+                        //if()
 
                         d3.selectAll(".original1").transition().duration(1500)
                               .style("width", "80px")//function(d,i){
@@ -204,44 +234,37 @@ define([
                               })
                               .style("margin-top",weight+315+"px");
 
-                        d3.select(".original2").transition().duration(1500)
-                            .style("margin-top", function(d){
-
-                              var weight = d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1);
-
-                              d3.selectAll(".original2").transition().duration(1500)
-                                      .style("margin-top",weight+315+"px");
-
-                              d3.select("#w2").transition().duration(1500)
-                                      .style("top",weight+"px");
-
-                              return weight+315+"px";
-                        });
+                        d3.selectAll(".original2").transition().duration(1500)
+                                .style("margin-top",-weight+315+"px");
 
                         d3.select("#w1").transition().duration(1500)
-                            //  .style("left",weight/10+"px")
+                              .style("left",weight/5+"px")
+                              //.style("right", -degangle+"px")
                               .style("top",weight+"px");
 
-                        var element = document.getElementById('w1');
+                        d3.select("#w2").transition().duration(1500)
+                                .style("top",-weight+"px");
 
-                      	var originx = element.getBoundingClientRect().left;// + 360;
-                      	var originy = element.getBoundingClientRect().top + 108;
+                        var w1 = document.getElementById('scale');
+
+                      	var originx = w1.getBoundingClientRect().left+50;// + 360;
+                      	//var originy = w1.getBoundingClientRect().top + 108;
 
                         var angle = -Math.atan2(weight, originx);//+Math.PI/5;
                         var degangle = (angle*(180/Math.PI));
 
-                        console.log(degangle);
+                        angles.push(degangle);
+
+                        //console.log(degangle);
                         //console.log(originx);
 
                         d3.select("#rot").transition().duration(1500)
                                 .style("transform","rotate("+degangle+"deg)");
 
-                              //.attr("y",weight+400);
-                        //d3.select("#cweight").transition().duration(1500)
-                        //      .attr("cy", weight+400);
-
                         return weight+315+"px";
                       });
+
+                      //d3.select
                 });
       });
 
@@ -294,6 +317,21 @@ define([
 
                       d3.select("#w2").transition().duration(1500)
                               .style("top",weight+"px");
+
+                      var w1 = document.getElementById('w2');
+
+                      var originx = w1.getBoundingClientRect().left+50;// + 360;
+                      //var originy = w1.getBoundingClientRect().top + 108;
+
+                      var angle = Math.atan2(weight, originx);//+Math.PI/5;
+                      var degangle = (angle*(180/Math.PI));
+
+                      console.log(degangle);
+                      //console.log(originx);
+
+                      d3.select("#rot").transition().duration(1500)
+                              .style("transform","rotate("+degangle+"deg)");
+
 
                       return weight+315+"px";
                     });

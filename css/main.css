@@ -4,6 +4,15 @@ Add main CSS here
 
 */
 
+.graticule {
+  fill: none;
+  stroke: #000;
+}
+
+.graticule.outline {
+  stroke-width: 2px;
+}
+
 #rot {
   /*transform-origin: 0px 0px;*/
 }

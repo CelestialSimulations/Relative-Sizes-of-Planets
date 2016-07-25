@@ -179,8 +179,8 @@
 
 
                 <div style="position: absolute; width: 720px; margin-top: 60px; margin-left: auto; margin-right: auto; display: block; pointer-events: none;">
-                    <img id="rot" style="transform:rotate(0deg); position:absolute; width: 720px;" src="ScaleSVGs/scalerot.svg" />
-                    <img style="position:absolute; width: 720px;" src="ScaleSVGs/scale.svg" />
+                    <img id="rot" style="transform-origin: 360px 108px; transform:rotate(0deg); position:absolute; width: 720px;" src="ScaleSVGs/scalerot.svg" />
+                    <img id="scale" style="position:absolute; width: 720px;" src="ScaleSVGs/scale.svg" />
                     <img id="w1" style="position:absolute; width: 720px;" src="ScaleSVGs/scalew1.svg" />
                     <img id="w2" style="position:absolute; width: 720px;" src="ScaleSVGs/scalew2.svg" />
                 </div>
@@ -229,18 +229,20 @@
 
             <div id="planet_surface_area" style="display: none;">
 
-                <div id="subdivision">
-                    <input id="#subin" type="range" min="1" max="12" value="8">
-                    <output id="#subout" name="subdivision"></output>
-                </div>
-
-                <select id="projection-menu"></select>
-
-                <div id="geodesic_holder"></div>
-
             </div>
 
-            <div id="planet_volume" style="display: none;"></div>
+            <div id="planet_volume" style="display: none;">
+
+              <!--<div id="subdivision">
+                  <input id="#subin" type="range" min="1" max="12" value="8">
+                  <output id="#subout" name="subdivision"></output>
+              </div>
+
+              <select id="projection-menu"></select>
+
+              <div id="geodesic_holder"></div>-->
+
+            </div>
             <!--<script type="text/javascript">
               //$("embed-css").html()
               //$("#Jupiter_ob").setSVGStyleLink('css/main.css')
@@ -255,7 +257,7 @@
     </div>
 
     <script>
-        var aitoff = d3.geoAitoff();
+        //var aitoff = d3.geoAitoff();
     </script>
 
 
