@@ -5,7 +5,7 @@ define([
     'd3',
     'backbone',
     'js/models/planetModel',
-    'lib/jquery-ui/jquery-multiselect',
+    'jquery-multiselect',
     'dist/jquery.svg.es5.min'
     //'lib/jquery/dist/jquery.svg.es5.js',
     //'lib/jquery/dist/jquery.svg.js'

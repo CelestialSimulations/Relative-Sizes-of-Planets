@@ -5,13 +5,13 @@ define([
     'backbone',
     'js/models/planetModel',
     //'d3.geodesic.min.js'
-    'lib/d3-plugins-master/geodesic/geodesic',
+    'd3-plugins-master/geodesic/geodesic',
     //'https://d3js.org/d3-array.v1.min.js',
     //'https://d3js.org/d3-geo.v1.min.js',
     //'https://d3js.org/d3-geo-projection.v1.min.js'
     //'https://d3js.org/d3-array.v1.min.js',
     //'https://d3js.org/d3-geo.v1.min.js'
-    'lib/d3-geo-projection/d3-geo-projection',
+    'd3-geo-projection/d3-geo-projection',
     //'http://d3js.org/topojson.v1.min.js'
     //'lib/d3-plugins-master/geom/contour/contour',
     //'lib/d3-plugins-master/geo/polyhedron/polyhedron',
