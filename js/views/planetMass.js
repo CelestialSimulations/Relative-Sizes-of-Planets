@@ -144,6 +144,8 @@ define([
       var pArray1DropBtn2 = [];
 
       var weights = [0, 0];
+      var weights2 = [0, 0];
+
       var angles = [0, 0];
 
       if(angles.length > 2) {
@@ -205,7 +207,6 @@ define([
                   if(weights.length > 2) {
                     weights.shift();
                   }
-                  console.log(weights[1]);
                   return weights[1]+305+"px";
                 })
                 .each("end",function(){
@@ -220,16 +221,9 @@ define([
 
                         weights.push(weight);
 
-                        //console.log(weights);
-
-                        //if()
-
                         d3.selectAll(".original1").transition().duration(1500)
-                              .style("width", "80px")//function(d,i){
-                                //return (60-(i*30))+20+"px";
-                              //})
+                              .style("width", "80px")
                               .style("margin-left",function(d, i){
-                                //console.log(i);
                                 return i*80+"px";
                               })
                               .style("margin-top",weight+315+"px");
@@ -238,7 +232,7 @@ define([
                                 .style("margin-top",-weight+315+"px");
 
                         d3.select("#w1").transition().duration(1500)
-                              .style("left",weight/5+"px")
+                              //.style("left",weight/5+"px")
                               //.style("right", -degangle+"px")
                               .style("top",weight+"px");
 
@@ -247,16 +241,13 @@ define([
 
                         var w1 = document.getElementById('scale');
 
-                      	var originx = w1.getBoundingClientRect().left+50;// + 360;
+                      	var originx = w1.getBoundingClientRect().left;// + 360;
                       	//var originy = w1.getBoundingClientRect().top + 108;
 
-                        var angle = -Math.atan2(weight, originx);//+Math.PI/5;
+                        var angle = -Math.atan2(weight, originx);//-Math.PI/6;
                         var degangle = (angle*(180/Math.PI));
 
                         angles.push(degangle);
-
-                        //console.log(degangle);
-                        //console.log(originx);
 
                         d3.select("#rot").transition().duration(1500)
                                 .style("transform","rotate("+degangle+"deg)");
@@ -264,7 +255,6 @@ define([
                         return weight+315+"px";
                       });
 
-                      //d3.select
                 });
       });
 
@@ -284,7 +274,12 @@ define([
           .transition().duration(1000)
               .style("float","right")
               .style("position","absolute")
-              .style("margin-top","305px")
+              .style("margin-top",function(d) {
+                if(weights.length > 2) {
+                  weights.shift();
+                }
+                return weights[1]+305+"px";
+              })
               .each("end",function(){
 
                 d3.select(".original2").transition().duration(1500)
@@ -295,6 +290,7 @@ define([
                           .style("margin-top", function(d){
 
                             var weight = d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2);
+                            weights2.push(weight);
 
                             d3.selectAll(".original1").transition().duration(1500)
                                     .style("margin-top",weight+315+"px");
@@ -315,12 +311,15 @@ define([
                               })
                               .style("margin-top",weight+315+"px");
 
+                      d3.select("#w1").transition().duration(1500)
+                              .style("top",-weight+"px");
+
                       d3.select("#w2").transition().duration(1500)
                               .style("top",weight+"px");
 
                       var w1 = document.getElementById('w2');
 
-                      var originx = w1.getBoundingClientRect().left+50;// + 360;
+                      var originx = w1.getBoundingClientRect().left;//+50;// + 360;
                       //var originy = w1.getBoundingClientRect().top + 108;
 
                       var angle = Math.atan2(weight, originx);//+Math.PI/5;

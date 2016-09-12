@@ -16,6 +16,9 @@ Add main CSS here
 #rot {
   /*transform-origin: 0px 0px;*/
 }
+.btn {
+  z-index: 100;
+}
 
 #projection-menu {
   position: absolute;
