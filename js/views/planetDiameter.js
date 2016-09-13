@@ -62,8 +62,6 @@ define([
     /***********************************************/
     draw_planets: function() {
 
-      var letmeclosethistabfunction;
-
       $.widget.bridge('uitooltip', $.ui.tooltip);
 
       /***********************************************/
@@ -177,7 +175,7 @@ define([
 
       var scope = this;
 
-      var options = d3.select("#planet_diameter").append("select").attr("multiple","").selectAll()
+      var options = d3.select("#planet_diameter").append("select").attr("id","planet_select").attr("multiple","").selectAll()
             .data(this.model.get("data"))
           .enter()
             .append("option")
@@ -190,7 +188,7 @@ define([
 
       //options.hover({})
 
-      $("select").multiselect({
+      $("#planet_select").multiselect({
 
         selectedList: 9,
 
