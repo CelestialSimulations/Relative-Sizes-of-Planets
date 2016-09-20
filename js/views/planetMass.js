@@ -6,64 +6,28 @@ define([
     'backbone',
     'js/models/planetModel',
     'js/views/addPlanet',
-    'http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js'
-    //'slick/slick.min.js'
-    //'earth'
+    'lib/bootstrap/js/bootstrap.min.js'
+
 ], function($, $ui, d3, backbone, planetModel, addPlanetData) {
 
   var planetView = backbone.View.extend({
 
     initialize: function() {
 
-      //console.log(addPlanetData);
-
       this.activate_mass_sim();
       this.draw_planets();
       this.planet_drop();
       this.remove_planet_on_click();
 
-      //this.elementMass = "#planet_mass";
-
-      //this.width = this.model.get("width");
-      //this.height = this.model.get("height");
-
-      //this.draw_planets();
-      //this.draw_chart();
-      //this.planet_sliding();
-      //this.draw_svg_planets();
-      //this.weight_scale();
-
-      /*this.sizeChart();
-      this.axis();
-      this.scale();
-      this.chart();
-      this.bar_width();
-      this.draw_bars();
-      this.model.set(this.type(this.model.get("data")));*/
-
-      //this.draw_rects_chart();
-      //this.draw_rects();
     },
 
     activate_mass_sim: function() {
-      //if(d3.select("#planet_diameter").attr("display","inline")){
       $("#mass").click(function(){
         $("#planet_mass").show();
         $("#planet_diameter").hide();
         $("#planet_surface_area").hide();
         $("#planet_volume").hide();
-        /*d3.select("#planet_diameter").transition().duration(500)
-              .style("opacity", "0")
-              .each("end",function(){
-                d3.select(this).style("display","none");
-              });
-        d3.select("#planet_mass").transition().duration(500)
-              .style("opacity", "1")
-              .each("end",function(){
-                d3.select(this).style("display","inline");
-              });*/
       });
-    //}
     },
 
     draw_planets: function() {
@@ -74,10 +38,6 @@ define([
           test();
         });
       }
-      //test();
-      //console.log(this.model.get("data"));
-
-      //d3.select("#rot").style("transform-origin","360px 108px");
 
       var pData = this.model.get("data");
 
@@ -87,15 +47,10 @@ define([
                          .append("div")
                             .attr("class","item")
                             .attr("id",function(d) {
-                              //d3.select("#Mercury_div_1").attr("class","item active");
                               return d.name+"_div_1";
                             })
-                            //.attr("class","svgs")
                          .append("img")
                             .attr("class","img-circle")
-                            //.style("position","absolute")
-                            //.attr("id",function(d) { return d.name+"_img";})
-                            //.style("margin-top", function(d) { return d.mass/3-200+"px";})
                             .attr("width","100px")
                             .attr("height", "100px")
                             .attr("src", function(d) { return "PlanetSVGs/"+d.name+".svg";});
@@ -109,12 +64,8 @@ define([
                          .append("div")
                             .attr("class","item")
                             .attr("id",function(d) { return d.name+"_div_2";})
-                            //.attr("class","svgs")
                          .append("img")
                             .attr("class","img-circle")
-                            //.style("position","absolute")
-                            //.attr("id",function(d) { return d.name+"_img";})
-                            //.style("margin-top", function(d) { return d.mass/3-200+"px";})
                             .attr("width","100px")
                             .attr("height", "100px")
                             .attr("src", function(d) { return "PlanetSVGs/"+d.name+".svg";});

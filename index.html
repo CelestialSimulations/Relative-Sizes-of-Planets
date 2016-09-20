@@ -9,31 +9,14 @@
     <link rel="stylesheet" href="lib/jquery-ui/jquery-ui.css">
     <link rel="stylesheeet" href="lib/jquery-ui/jquery-multiselect.css">
 
-    <!--<link rel="stylesheet" type="text/css" href="slick/slick.css"/>
-        <link rel="stylesheet" type="text/css" href="slick/slick-theme.css"/>-->
-
-    <script src="https://d3js.org/d3-array.v1.min.js"></script>
-    <script src="https://d3js.org/d3-geo.v1.min.js"></script>
-    <script src="https://d3js.org/d3-geo-projection.v1.min.js"></script>
-
     <script src="lib/jquery/jquery.min.js"></script>
-
-    <!--<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
-        <script type="text/javascript" src="//code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
-        <script type="text/javascript" src="slick/slick.min.js"></script>-->
-
-    <script src="dist/jquery.svg.es5.min.js"></script>
-    <!--<link href="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.5.1/p5.js">-->
-
-    <!--<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">-->
-    <!--  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>-->
+    <script src="ext-lib/dist/jquery.svg.es5.min.js"></script>
 
     <script src="lib/jquery-ui/jquery-ui.min.js"></script>
-    <script src="jquery-multiselect.js"></script>
+    <script src="ext-lib/jquery-multiselect.js"></script>
+
     <!-- The main script is the entry point for the application -->
     <script data-main="js/main" src="lib/require/require.js"></script>
-
-    <!--<script type="text/javascript" src="../src/jquery.multiselect.js"></script>-->
 
 </head>
 
@@ -129,8 +112,6 @@
                                 </div>
                             </div>
                             <div id="img_holder1" style="position: relative; float: left; width: 400px"></div>
-
-                            <!--<img style="position:absolute; width: 750px;" src="ScaleSVGs/scalew1.svg"/>-->
                         </div>
 
                     </div>
@@ -158,45 +139,13 @@
                         </div>
                     </div>
 
-                    <!--<svg id="svgweight1" version="1.1" height="600px" width="400px"  xmlns="http://www.w3.org/2000/svg" >
-                      <clipPath id="cut-off-bottom">
-                          <rect id="rweight" x="0" y="400" width="400" height="100" />
-                      </clipPath>
-
-                      <ellipse id="cweight" cx="200" cy="400" rx="200" ry="50" clip-path="url(#cut-off-bottom)" />
-                </svg>
-
-                <svg id="svgweight2" style="float: right;" version="1.1" height="600px" width="400px"  xmlns="http://www.w3.org/2000/svg" >
-                      <clipPath id="cut-off-bottom">
-                          <rect id="rweight" x="0" y="400" width="400" height="100" />
-                      </clipPath>
-
-                      <ellipse id="cweight" cx="200" cy="400" rx="200" ry="50" clip-path="url(#cut-off-bottom)" />
-                </svg>
-                style="margin: auto; display: block;" width="700"
-              -->
-
-
-
                 <div style="position: absolute; width: 720px; margin-top: 60px; margin-left: auto; margin-right: auto; display: block; pointer-events: none;">
                     <img id="rot" style="transform-origin: 360px 108px; transform:rotate(0deg); position:absolute; width: 720px;" src="ScaleSVGs/scalerot.svg" />
                     <img id="scale" style="position:absolute; width: 720px;" src="ScaleSVGs/scale.svg" />
                     <img id="w1" style="position:absolute; width: 720px;" src="ScaleSVGs/scalew1.svg" />
                     <img id="w2" style="position:absolute; width: 720px;" src="ScaleSVGs/scalew2.svg" />
                 </div>
-
               </div>
-
-                <!--<div width="400px" height="50px">
-              <svg width="100%" height="100%" viewBox="0 0 1207 511">
-                  <g transform="matrix(2.48866,0,0,1.05232,-540.039,-72.61)">
-                      <path d="M217,311.5C217,445.429 325.571,554 459.5,554C593.429,554 702,445.429 702,311.5L217,311.5Z" style="fill:black;"/>
-                  </g>
-              </svg>
-            </div>-->
-
-                <!--<div class="weight_styling" id="planet_holder1" style="margin-top: 400px;"></div>-->
-
             </div>
 
             <div id="planet_diameter" type="radio" style="display: none;">
@@ -206,24 +155,11 @@
                     <input type="text" id="amount" value="100%" readonly style="border:0; font-weight:bold; background-color: rgba(0, 0, 0, 0);">
                 </p>
 
-                <!--<div id="slider" style="position: fixed; width: 700px; margin-top: 25px;"></div>-->
                 <div id="slider"></div>
 
-                <!--<div id="accordion" style="margin-top: 20px; width: 150px; float: left; padding: -10px;">-->
-
                 <h3>Planet Selection</h3>
-                <!--<div>
-                  <table class="table table-hover" style="margin: 0px; padding: 0px;">
-                      <tbody id = "tablebody" style="margin: 0px; padding: 0px;">
-                          <tr>
-                          </tr>
-                      </tbody>
-                  </table>
-                </div>-->
 
-                <div id="planet_svgs">
-
-                </div>
+                <div id="planet_svgs"></div>
 
             </div>
 
@@ -231,42 +167,10 @@
               <select style="position: relative" id="projection-menu"></select>
             </div>
 
-            <div id="planet_volume" style="display: none;">
-
-              <!--<div id="subdivision">
-                  <input id="#subin" type="range" min="1" max="12" value="8">
-                  <output id="#subout" name="subdivision"></output>
-              </div>
-
-              <select id="projection-menu"></select>
-
-              <div id="geodesic_holder"></div>-->
-
-            </div>
-            <!--<script type="text/javascript">
-              //$("embed-css").html()
-              //$("#Jupiter_ob").setSVGStyleLink('css/main.css')
-
-              //$("#Jupiter_ob").getSVG().find("#circle_jupiter").attr("fill","blue");
-            //  $( "#accordion" ).accordion({collapsible: true, animate: "swing", heightStyle: "content"});
-              //$("#s").multiselect();
-            </script>-->
-
+            <div id="planet_volume" style="display: none;"></div>
         </div>
 
     </div>
-
-    <script>
-        //var aitoff = d3.geoAitoff();
-    </script>
-
-
-    <!--<svg class="chart"></svg>-->
-    <!--<script>
-            $("#myCarousel").carousel({interval: false});
-            $("#carousel2").carousel({interval: false});
-          </script>-->
-
 
 </body>
 

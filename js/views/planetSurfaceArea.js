@@ -4,18 +4,8 @@ define([
     'd3',
     'backbone',
     'js/models/planetModel',
-    //'d3.geodesic.min.js'
-    'd3-plugins-master/geodesic/geodesic',
-    //'https://d3js.org/d3-array.v1.min.js',
-    //'https://d3js.org/d3-geo.v1.min.js',
-    //'https://d3js.org/d3-geo-projection.v1.min.js'
-    //'https://d3js.org/d3-array.v1.min.js',
-    //'https://d3js.org/d3-geo.v1.min.js'
-    'd3-geo-projection/d3-geo-projection',
-    //'http://d3js.org/topojson.v1.min.js'
-    //'lib/d3-plugins-master/geom/contour/contour',
-    //'lib/d3-plugins-master/geo/polyhedron/polyhedron',
-    //'lib/d3-plugins-master/geo/tile/tile'
+    'ext-lib/d3-plugins-master/geodesic/geodesic',
+    'ext-lib/d3-geo-projection/d3-geo-projection',
     'http://d3js.org/d3.geo.projection.v0.min.js'
 
 ], function($, $ui, d3, backbone, planetModel) {
@@ -31,7 +21,6 @@ define([
     initialize: function() {
 
       this.activate_surface_area_sim();
-      //this.projection();
       this.map();
 
     },

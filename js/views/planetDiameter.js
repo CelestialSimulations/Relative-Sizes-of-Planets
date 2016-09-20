@@ -5,10 +5,8 @@ define([
     'd3',
     'backbone',
     'js/models/planetModel',
-    'jquery-multiselect',
-    'dist/jquery.svg.es5.min'
-    //'lib/jquery/dist/jquery.svg.es5.js',
-    //'lib/jquery/dist/jquery.svg.js'
+    'ext-lib/jquery-multiselect',
+    'ext-lib/dist/jquery.svg.es5.min'
 
 ], function($, $ui, d3, backbone, planetModel) {
 
@@ -40,16 +38,6 @@ define([
         $("#planet_mass").hide();
         $("#planet_surface_area").hide();
         $("#planet_volume").hide();
-        /*d3.select("#planet_diameter").transition().duration(500)
-              .style("opacity", "1")
-              .each("end",function(){
-                d3.select(this).style("display","inline");
-              });
-        d3.select("#planet_mass").transition().duration(500)
-              .style("opacity", "0")
-              .each("end",function(){
-                d3.select(this).style("display","none");
-              });*/
       });
     },
 
@@ -142,32 +130,12 @@ define([
                     // d.name looks like.
                     .attr("src", function(d) { /*console.log(d.name);*/ return "PlanetSVGs/"+d.name+".svg"; });
 
-          /*d3.select("#planet_svgs")
-                  //.data(dataSorted)
-              //.enter()
-                  .append("object")
-                  .style("position", "absolute")
-                  .style("margin-top", -(dataSorted[1].diameter/2)/400+window.innerHeight/2-70+"px")
-                  .style("margin-left", -(dataSorted[1].diameter/2)/400+window.innerWidth/2-150+"px")
-                  .attr("width", (dataSorted[1].diameter+100000)/400)
-                  .attr("height", (dataSorted[1].diameter+100000)/400)
-                  .attr("data", "RingsOfSaturn.svg");
-
-                  console.log(dataSorted[1].diameter);*/
-
-          //Additional features added easily with jQuery-ui.
-
-
-
+          //Additional features added easily with jQuery, a Javascript library
+          //
           //.tooltip creates a tooltip for each planet
           $('[data-toggle="tooltip"]').tooltip( );
           //.draggable makes the div containing the svgs draggable
           $("#planet_svgs").draggable();
-
-          //$("#Jupiter_obj").setSVGStyle("fill","blue");
-
-          //document.querySelector("#Jupiter_obj").getSVGDocument().getElementByID("circle_jupiter").setAttribute("fill","blue");
-          //$("#Jupiter_obj").getSVG().find("g circle").attr('fill', 'blue');
 
     },
 
@@ -181,26 +149,20 @@ define([
             .append("option")
             .attr("selected", "")
             .attr("id",function(d){return d.name+"_opt";})
-            //.attr("prop: selected", true)
-            //.attr("select","selected")
             .attr("value", function(d){return d.name;})
-            .text(function(d){return d.name});
+            .text(function(d){return d.name;});
 
-      //options.hover({})
-
+      // creates functions for the deselection and selection
+      // of the planets
       $("#planet_select").multiselect({
 
         selectedList: 9,
 
         click: function(event, ui) {
-          /*console.log(ui.value);
-          d3.select("#"+ui.value+"_obj").transition().duration(300)
-          .style("opacity",".6");*/
           $("#"+ui.value+"_obj").toggle("size", 3000);
         },
 
         checkAll: function() {
-          //$("#"+ui.value+"_obj").toggle("size", 3000);
           for(var i = 0; i < scope.model.get("data").length; i++) {
             $("#"+scope.model.get("data")[i].name+"_obj").show("size",3000);
           }
@@ -210,146 +172,9 @@ define([
           for(var i = 0; i < scope.model.get("data").length; i++) {
             $("#"+scope.model.get("data")[i].name+"_obj").hide("size",3000);
           }
-          //d3.select("img").transition().dur
-          //console.log(ui.value)
-          //$("#"+ui.value+"_obj").toggle("size", 3000);
         },
 
       });
-
-    },
-
-    /***********************************************/
-    //
-    // planet_table creates a table using data, and also
-    // creates functions for the deselection and selection
-    // of the planets.
-    //
-    /***********************************************/
-    planet_table: function() {
-
-      var scope = this;
-
-      var pData = this.model.get("data");
-
-      var dataTable = function() {}
-
-      dataTable.prototype.add_element = function(pName) {
-
-          column = $("<td>").attr("id", "tablecolumn_"+pName)
-              .text(pName)
-              .attr("padding-right","300");
-
-          label = $("<tr>").append(column);
-          return label;
-
-      }
-
-      dataTable.prototype.build_list = function(parent, pathIndex) {
-
-          for (var e = 0; e < pathIndex.length; e++) {
-              menu = this.add_element(pathIndex[e]);
-              $(parent).append(menu);
-
-              /***********************************************/
-              // Try tweaking the menu, maybe you can style it better!
-              /***********************************************/
-              $(menu)
-                  .css("background-color","lightgray");
-
-              menu.click([pData[e], menu], click_row);
-              menu.mouseover([pData[e], menu], hover_row);
-          }
-      }
-
-      /***********************************************/
-      // get_planet_name takes the data it is given as parameter, interates
-      // through it, and delivers an array containing only the key name.
-      /***********************************************/
-      var get_planet_name = function(d) {
-          var pName = [];
-          for (var i = 0; i < d.length; i++) {
-              pName.push(d[i].name);
-          }
-          // Try uncommenting the following log to see what the resultant
-          // data looks like.
-          /* console.log.(pName); */
-          return pName;
-      }
-
-      var click_row = function(d) {
-
-          var pName = d.data[0].name;
-          var menu = d.data[1];
-
-          $(menu)
-              .css("background-color", "white");
-
-          d3.select("#"+pName+"_obj").transition().duration(300)
-                .style("opacity", 0);
-
-          menu.unbind("mouseover");
-          menu.unbind("mouseout");
-
-          menu.click([d.data[0], menu], redraw_planet);
-      }
-
-      var redraw_planet = function(d) {
-
-        var pName = d.data[0].name;
-        var menu = d.data[1];
-
-        $(menu)
-            .css("background-color", "lightgray");
-
-        d3.select("#"+pName+"_obj").transition().duration(300)
-              .style("opacity", 1);
-
-              menu.unbind("mouseover");
-              menu.unbind("mouseout");
-
-        menu.click([d.data[0], menu], click_row);
-      }
-
-      var hover_row = function(d) {
-
-        var pName = d.data[0].name;
-        var menu = d.data[1];
-
-        var interpolateRadius = d3.interpolate(2, 3);
-
-        d3.select("#"+pName+"_obj").transition().duration(300)
-              .style("opacity", .7)
-              .style("margin-top", function(d) { return -(d.diameter/2)/400+window.innerHeight/2-10+"px";} )
-              .style("margin-left", function(d) {return -(d.diameter/2)/400+window.innerWidth/2-10+"px";} )
-              .attr("width", d.data[0].diameter/400+20+"px")
-              .attr("height", d.data[0].diameter/400+20+"px");
-
-        menu.mouseout([d.data[0], menu], out_row);
-      }
-
-      var out_row  = function(d) {
-
-        var pName = d.data[0].name;
-        var menu = d.data[1];
-
-        d3.select("#"+pName+"_obj").property(this.value).transition().duration(300)
-              .style("opacity", 1)
-              .style("margin-top", function(d) {return -(d.diameter/2)/400+window.innerHeight/2+"px";} )
-              .style("margin-left", function(d) {return -(d.diameter/2)/400+window.innerWidth/2+"px";} )
-              .attr("width", d.data[0].diameter/400+"px")
-              .attr("height", d.data[0].diameter/400+"px");
-
-      }
-
-      var pName = get_planet_name(pData);
-
-      /***********************************************/
-      // list calls the table with the paremeter of
-      // the function pName, and the table uses that data for
-      // the names of the planets.
-      /***********************************************/
-      var list = new dataTable().build_list("#tablebody", pName);
 
     },
 
