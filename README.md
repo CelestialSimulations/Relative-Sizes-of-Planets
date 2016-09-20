@@ -28,9 +28,9 @@ lonely now, would we? And what would be the point of looking at the simulations 
 ## Getting the Code
 
 There are several ways to get the code for the simulation onto your computer:
-1. [Cloning it](###cloning)
-2. [Downloading it](###downloading)
-3. [Forking and Cloning it](###forking and cloning)
+1. [Cloning it](#cloning)
+2. [Downloading it](#downloading)
+3. [Forking and Cloning it](#forking-and-cloning)
 
 ### Cloning
 
@@ -45,6 +45,7 @@ type in the following git commands.
 
 ```
 git clone https://github.com/CelestialSimulations/Relative-Sizes-of-Planets.git
+cd Relative-Sizes-of-Planets
 git submodule init
 git submodule update
 ```
@@ -67,6 +68,7 @@ and drag your folder to the Atom application. You should see all of the code.
 
 In order to 'fork' a repository, which is to say, copy a version to it to your own account, you'll need to
 create a Github account — and it's never too soon to try Github. Once you've done that, return to this repository, and click the Fork button.
+
 ![alt fork](fork.png "fork")
 
 Now open Github Desktop, click the plus icon, and select the Clone tab.
