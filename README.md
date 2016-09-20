@@ -28,6 +28,7 @@ lonely now, would we? And what would be the point of looking at the simulations 
 ## Getting the Code
 
 There are several ways to get the code for the simulation onto your computer:
+
 1. [Cloning it](#cloning)
 2. [Downloading it](#downloading)
 3. [Forking and Cloning it](#forking-and-cloning)
