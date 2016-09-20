@@ -8,7 +8,7 @@ can select the data whenever you type the name of the variable. For example:
 ```
 var somedata = ["apples", "oranges","pineapple"];
 ```
-This is a variable in which to store data. This is much more efficient than trying to use a bunch of variables,
+This is a type of variable, called an 'array', in which to store data. This is much more efficient than trying to use a bunch of variables,
 like:
 
 ```
@@ -18,12 +18,53 @@ fruit3 = "pineapple";
 ```
 With data, you can loop through it, which becomes very efficient, compared to creating code for each variable, or in our case, each planet.
 
+In order to access a value in data, you would use:
+
+```
+somedata[0];
+```
+This code would select the *first* value in somedata. The order in an array actually starts from 0, rather than 1.
+
+In data, we can also use numbers, text(usually called strings), and _objects_. Objects are variables that can store multiple 'properties'. They look like this:
+
+```
+var human = {"name": "Tom", "height": 5.5, "coolness": "9/10", "favorite_movie": "Deadpool"}
+```
+
+If you wanted to get the human's coolness, you would use:
+
+```
+human.coolness
+```
+
+You can store multiple objects in array easily, so we could actually store the everyone's attributes in a single variable.
+
 In this simulation, I have created data for Earth. It looks like this:
 ```
-var data = [{name: "Earth", mass: 5.97, diameter: 12756 }]
+var data = [{name: "Earth", mass: 5.97, diameter: 12756 }];
 ```
-It will be your job to to add the missing planets. After all, we wouldn't want our lovely planet Earth to be
-lonely now, would we? And what would be the point of looking at the simulations if there was nothing to compare planet Earth to?
+Here are hints to finding the diameter of each planet.
+
+| Name          | Radius     | Circumference | Surface Area  | Diameter      | Mass     |
+| ------------- |:----------:|:-------------:|:-------------:|:-------------:| --------:|
+| Sun           | <input/>   | 1392000π      |<input/>     | <input/>      | 1988500  |
+| Mercury       | 2439.5     | <input/>     |<input/>     | <input/>      | 0.330    |
+| Venus         | <input/>   | 38025.8       |<input/>     | <input/>      | 4.87     |
+| Earth         | 6378       | 12756π        | 162715536π    | 12756         | 5.97     |
+| Moon          | <input/>   | <input/>     | 12075625π     | <input/>      | 0.073    |
+| Mars          | <input/>   | 6792π         |<input/>     |<input/>     | 0.642    |
+| Jupiter       | <input/>   | <input/>     | 64228053049.5 |<input/>     | 1898     |
+| Saturn        | <input/>   | 378675        |<input/>     |<input/>     | 568      |
+| Uranus        | 25559      | <input/>     |<input/>     |<input/>     | 86.8     |
+| Neptune       | <input/>   | <input/>     | 2453022784π   |<input/>     | 102      |
+| Pluto         | <input/>   | 7445.6        |<input/>     |<input/>     | 0.0146   |
+
+Remember:
+- Diameter  = 2 × r
+- Circumference = 2 × π × r
+- Surface Area = 4 × π × r²
+
+It will be your job to to add the missing planets. After all, we wouldn't want our lovely planet Earth to be lonely now, would we? And what would be the point of looking at the simulations if there was nothing to compare planet Earth to?
 
 ## Getting the Code
 
