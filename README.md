@@ -47,17 +47,17 @@ Here are hints to finding the diameter of each planet.
 
 | Name          | Radius     | Circumference | Surface Area  | Diameter      | Mass     |
 | ------------- |:----------:|:-------------:|:-------------:|:-------------:| --------:|
-| Sun           | <input/>   | 1392000π      |<input/>     | <input/>      | 1988500  |
-| Mercury       | 2439.5     | <input/>     |<input/>     | <input/>      | 0.330    |
-| Venus         | <input/>   | 38025.8       |<input/>     | <input/>      | 4.87     |
+| Sun           | <input/>   | 1392000π      | <input/>      | <input/>      | 1988500  |
+| Mercury       | 2439.5     | <input/>      | <input/>      | <input/>      | 0.330    |
+| Venus         | <input/>   | 38025.8       | <input/>      | <input/>      | 4.87     |
 | Earth         | 6378       | 12756π        | 162715536π    | 12756         | 5.97     |
-| Moon          | <input/>   | <input/>     | 12075625π     | <input/>      | 0.073    |
-| Mars          | <input/>   | 6792π         |<input/>     |<input/>     | 0.642    |
-| Jupiter       | <input/>   | <input/>     | 64228053049.5 |<input/>     | 1898     |
-| Saturn        | <input/>   | 378675        |<input/>     |<input/>     | 568      |
-| Uranus        | 25559      | <input/>     |<input/>     |<input/>     | 86.8     |
-| Neptune       | <input/>   | <input/>     | 2453022784π   |<input/>     | 102      |
-| Pluto         | <input/>   | 7445.6        |<input/>     |<input/>     | 0.0146   |
+| Moon          | <input/>   | <input/>      | 12075625π     | <input/>      | 0.073    |
+| Mars          | <input/>   | 6792π         | <input/>      | <input/>      | 0.642    |
+| Jupiter       | <input/>   | <input/>      | 64228053049.5 | <input/>      | 1898     |
+| Saturn        | <input/>   | 378675        | <input/>      | <input/>      | 568      |
+| Uranus        | 25559      | <input/>      | <input/>      | <input/>      | 86.8     |
+| Neptune       | <input/>   | <input/>      | 2453022784π   | <input/>      | 102      |
+| Pluto         | <input/>   | 7445.6        | <input/>      | <input/>      | 0.0146   |
 
 Remember:
 - Diameter  = 2 × r
@@ -66,6 +66,12 @@ Remember:
 
 It will be your job to to add the missing planets. After all, we wouldn't want our lovely planet Earth to be lonely now, would we? And what would be the point of looking at the simulations if there was nothing to compare planet Earth to?
 
+<style>
+input {
+  background-color: rgba(0,0,0, 0);
+  border: none;
+}
+</style>
 ## Getting the Code
 
 There are several ways to get the code for the simulation onto your computer:
