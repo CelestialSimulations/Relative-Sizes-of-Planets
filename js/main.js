@@ -41,35 +41,11 @@ requirejs([
         {name: "Pluto",    	     mass: 0.0146,      diameter: 2370 }]
       };
 
-        //var scope = this;
-
-        /*var alteredData = planetData;
-
-        d3.select("#save_btn").on("click", function() {
-          var newName = $("#new_name_getter").val();
-          var newMass = $("#new_mass_getter").val();
-          var newDiameter = $("#new_diameter_getter").val();
-
-          console.log("N: "+newName);
-          console.log("M: "+$("#new_mass_getter").val());
-          console.log("D: "+$("#new_diameter_getter").val());
-
-          var newObject = {"name": newName, "mass": newMass, "diameter": newDiameter};
-          //console.log(newObject.name);
-
-          planetData.push(newObject);
-          console.log(planetData);
-        });*/
-
       this.planet_model = new planetModel (planetData);
-      //console.log(this.planet_model);
 
       this.add_planet_function = new addPlanet( { "model" : this.planet_model} );
-
       this.planet_surface_area_sim = new planetSurfaceArea( { "model": this.planet_model } );
-
       this.planet_volume_sim = new planetVolume( { "model": this.planet_model } );
-
       this.planet_mass_sim = new planetMass( { "model" : this.planet_model } );
       this.planet_diameter_sim = new planetDiameter( { "model" : this.planet_model } );
 

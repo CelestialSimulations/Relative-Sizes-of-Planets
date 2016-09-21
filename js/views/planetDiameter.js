@@ -20,12 +20,10 @@ define([
     /***********************************************/
     initialize: function() {
 
-      //this.planet_table();
       this.activate_diameter_sim();
       this.draw_planets();
       this.planet_select();
       this.size_slider();
-
 
     },
 
@@ -82,6 +80,8 @@ define([
         }
       );
 
+      var pScale = d3.max(dataSorted).diameter/500;
+
       /***********************************************/
       // planetImg is a variable that is all of the svgs. It appends
       // the objects that attach to the svgs in the file with the "data"
@@ -113,14 +113,14 @@ define([
                     // the margin push the planet to be in the center of
                     // each other, and the absolute position allows that
                     .style("position", "absolute")
-                    .style("margin-top", function(d) {return -(d.diameter/2)/2900+window.innerHeight/2-100+"px";})
-                    .style("margin-left", function(d) {return -(d.diameter/2)/2900+window.innerWidth/2+"px";})
+                    .style("margin-top", function(d) {return -(d.diameter/2)/pScale+window.innerHeight/2-100+"px";})
+                    .style("margin-left", function(d) {return -(d.diameter/2)/pScale+window.innerWidth/2+"px";})
                     .style("margin-bottom","200px")
                     .style("margin-right","200px")
                     // width and height are determine the dimensions of
                     // the individual planets
-                    .attr("width",function(d){ return d.diameter/2900; })
-                    .attr("height",function(d){ return d.diameter/2900; })
+                    .attr("width",function(d){ return d.diameter/pScale; })
+                    .attr("height",function(d){ return d.diameter/pScale; })
                     //.attr("type", "image/svg+xml")
                     .attr("id", function(d){ return d.name+"_obj";})
                     .attr("class","img-circle")
@@ -191,6 +191,7 @@ define([
       // a result of the slider function
       var scope = this;
       var interpolateRadius = d3.interpolate(2, 3);
+      var pScale = d3.max(this.model.get("data")).diameter/500;
 
       $( "#amount" ).val("100%");
 
@@ -205,10 +206,10 @@ define([
                   // Normally, planetImg would be called as this.planetImg, but that loses its
                   // known value when it is inside more than one function
                   scope.planetImg.transition().duration(300)
-                      .attr("width", function(d) { return interpolateRadius((d.diameter/2900) * ui.value)+"px"; })
-                      .attr("height", function(d) { return interpolateRadius((d.diameter/2900) * ui.value)+"px"; })
-                      .style("margin-left", function(d) { return interpolateRadius(-(d.diameter/2900)/2 * ui.value)+(window.innerWidth/2)+"px"; })
-                      .style("margin-top", function(d) { return interpolateRadius(-(d.diameter/2900)/2 * ui.value)+(window.innerHeight/2-100)+"px"; })
+                      .attr("width", function(d) { return interpolateRadius((d.diameter/pScale) * ui.value)+"px"; })
+                      .attr("height", function(d) { return interpolateRadius((d.diameter/pScale) * ui.value)+"px"; })
+                      .style("margin-left", function(d) { return interpolateRadius(-(d.diameter/pScale)/2 * ui.value)+(window.innerWidth/2)+"px"; })
+                      .style("margin-top", function(d) { return interpolateRadius(-(d.diameter/pScale)/2 * ui.value)+(window.innerHeight/2-100)+"px"; })
                       .style("z-index", -1);
               }
           });

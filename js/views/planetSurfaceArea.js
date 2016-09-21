@@ -38,6 +38,18 @@ define([
     },
 
     map: function() {
+      /*var options = d3.select("#planet_surface_area").append("select").attr("id","planet_vol_select").attr("multiple","").style("z-index",100).selectAll()
+            .data(this.model.get("data"))
+          .enter()
+            .append("option")
+            .attr("selected", "")
+            .attr("id",function(d){return d.name+"_vol";})
+            .attr("value", function(d){return d.name;})
+            .text(function(d){return d.name;});
+
+      $("#planet_vol_select").multiselect({
+        selectedList: 9
+      });*/
 
       var width = 960,
         height = 500;

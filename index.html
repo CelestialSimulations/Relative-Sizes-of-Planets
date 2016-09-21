@@ -7,13 +7,13 @@
     <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/main.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet" href="lib/jquery-ui/jquery-ui.css">
-    <link rel="stylesheeet" href="lib/jquery-ui/jquery-multiselect.css">
+    <link href="ext-lib/jquery-multiselect.css" rel="stylesheet" type="text/css">
 
     <script src="lib/jquery/jquery.min.js"></script>
     <script src="ext-lib/dist/jquery.svg.es5.min.js"></script>
 
     <script src="lib/jquery-ui/jquery-ui.min.js"></script>
-    <script src="ext-lib/jquery-multiselect.js"></script>
+    <!--<script src="ext-lib/jquery-multiselect.js"></script>-->
 
     <!-- The main script is the entry point for the application -->
     <script data-main="js/main" src="lib/require/require.js"></script>
@@ -37,11 +37,11 @@
               <label id="diameter" class="btn btn-primary">
                 <input type="radio" name="options" autocomplete="off"> Diameter
               </label>
-              <label id="surface_area" class="btn btn-primary">
-                <input type="radio" name="options" autocomplete="off"> Surface Area
-              </label>
               <label id="volume" class="btn btn-primary">
                 <input type="radio" name="options" autocomplete="off"> Volume
+              </label>
+              <label id="surface_area" class="btn btn-primary">
+                <input type="radio" name="options" autocomplete="off"> Surface Area
               </label>
             </div>
 
@@ -50,43 +50,6 @@
 
         <!-- where planet applications go -->
         <div id="planet_app">
-
-            <div id="planet_add">
-
-                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-                    <div class="modal-dialog" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h4 class="modal-title" id="myModalLabel">Add Planet</h4>
-                            </div>
-                            <div class="modal-body">
-
-                                <div class="input-group">
-                                    <span class="input-group-addon" id="basic-addon1">Name</span>
-                                    <input type="text" id="new_name_getter" class="form-control" placeholder="New planet name" aria-describedby="basic-addon1">
-                                </div>
-
-                                <div class="input-group" style="margin-top: 10px;">
-                                    <span class="input-group-addon" id="basic-addon2">Mass</span>
-                                    <input type="number" id="new_mass_getter" class="form-control" placeholder="Units of lbs" aria-describedby="basic-addon2">
-                                </div>
-
-                                <div class="input-group" style="margin-top: 10px;">
-                                    <span class="input-group-addon" id="basic-addon3">Diameter</span>
-                                    <input type="number" id="new_diameter_getter" class="form-control" placeholder="Units of km" aria-describedby="basic-addon3">
-                                </div>
-
-                            </div>
-                            <div class="modal-footer">
-                                <button id="close_btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                                <button id="save_btn" type="button" class="btn btn-primary">Save changes</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
 
             <div id="planet_mass">
 
@@ -163,11 +126,56 @@
 
             </div>
 
+            <div id="planet_volume" style="display: none;">
+              <p id="volSliderText">
+                  <label for="vol_amount">Size:</label>
+                  <input type="text" id="vol_amount" value="100%" readonly style="border:0; font-weight:bold; background-color: rgba(0, 0, 0, 0);">
+              </p>
+              <div id="vol_slider"></div>
+              <div id="vol_menu"></div>
+              <div id="vol_svgs"></div>
+            </div>
+
             <div id="planet_surface_area" style="display: none;">
               <select style="position: relative" id="projection-menu"></select>
             </div>
 
-            <div id="planet_volume" style="display: none;"></div>
+            <div id="planet_add">
+
+                <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h4 class="modal-title" id="myModalLabel">Add Planet</h4>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="input-group">
+                                    <span class="input-group-addon" id="basic-addon1">Name</span>
+                                    <input type="text" id="new_name_getter" class="form-control" placeholder="New planet name" aria-describedby="basic-addon1">
+                                </div>
+
+                                <div class="input-group" style="margin-top: 10px;">
+                                    <span class="input-group-addon" id="basic-addon2">Mass</span>
+                                    <input type="number" id="new_mass_getter" class="form-control" placeholder="Units of lbs" aria-describedby="basic-addon2">
+                                </div>
+
+                                <div class="input-group" style="margin-top: 10px;">
+                                    <span class="input-group-addon" id="basic-addon3">Diameter</span>
+                                    <input type="number" id="new_diameter_getter" class="form-control" placeholder="Units of km" aria-describedby="basic-addon3">
+                                </div>
+
+                            </div>
+                            <div class="modal-footer">
+                                <button id="close_btn" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button id="save_btn" type="button" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
     </div>
