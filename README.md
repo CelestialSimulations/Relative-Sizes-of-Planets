@@ -37,12 +37,14 @@ If you wanted to get the human's coolness, you would use:
 human.coolness
 ```
 
-You can store multiple objects in array easily, so we could actually store the everyone's attributes in a single variable.
+You can store multiple objects in array easily, so we could actually store the attributes of everyone in this class into a single variable.
 
 In this simulation, I have created data for Earth. It looks like this:
 ```
 var data = [{name: "Earth", mass: 5.97, diameter: 12756 }];
 ```
+Mass is in units of 10²⁴ kilograms, and diameter is in units of kilometers.
+
 Here are hints to finding the diameter of each planet.
 
 | Name          | Radius     | Circumference | Surface Area  | Diameter      | Mass     |
@@ -60,11 +62,11 @@ Here are hints to finding the diameter of each planet.
 | Pluto         | <input/>   | 7445.6        | <input/>      | <input/>      | 0.0146   |
 
 Remember:
-- Diameter  = 2 × r
+- Diameter = 2 × r
 - Circumference = 2 × π × r
 - Surface Area = 4 × π × r²
 
-It will be your job to to add the missing planets. After all, we wouldn't want our lovely planet Earth to be lonely now, would we? And what would be the point of looking at the simulations if there was nothing to compare planet Earth to?
+It will be your job to to add the missing planets. After all, we wouldn't want our lovely planet Earth to be lonely now, would we? And what would be the point of looking at the simulations if there was nothing to compare planet Earth to? ;)
 
 <style>
 input {

@@ -32,13 +32,6 @@ define([
 
     draw_planets: function() {
 
-      var test = function() {
-        console.log("again");
-        d3.select("body").on("mouseover", function(){
-          test();
-        });
-      }
-
       var pData = this.model.get("data");
 
       this.passive_planets = d3.select("#ci1").selectAll()
@@ -80,8 +73,6 @@ define([
       $("#l, #r").insertAfter("#"+last_planet+"_div_1");
       $("#l2, #r2").insertAfter("#"+last_planet+"_div_2");
 
-      //$("#planet_holder1").insertAfter("img");
-
       $("#myCarousel").carousel({interval: false});
       $("#carousel2").carousel({interval: false});
 
@@ -102,9 +93,6 @@ define([
       if(angles.length > 2) {
         angles.shift();
       }
-      //console.log(weights[1]);
-
-      //make asteroid program w/ d3
 
       d3.select("#drop_btn1").on("click", function() {
 
@@ -119,11 +107,13 @@ define([
 
                   pArray1DropBtn1.splice(i, 1);
 
+                  d3.select("#w1").transition().duration(1500)
+                        .style("top",d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2)+"px");
+
+                  d3.select("#w2").transition().duration(1500)
+                          .style("top",d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1)+"px");
+
                   d3.selectAll(".original1").transition().duration(700)
-                        //.style("margin-left",function(d, i){
-                          //d3.select(this).transition().duration(700).style("margin-left", i*100+"px");
-                        //  return i*100+"px";
-                        //})
                         .style("margin-top", d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2)+300+"px");
 
                   d3.selectAll(".original2").transition().duration(700)
@@ -145,12 +135,6 @@ define([
 
                   //console.log(index)
                 })
-                /*.on("mouseover", function(){
-                  d3.select(this).transition().style("margin-left","-5px").attr("width","110px").attr("height","110px");
-                })
-                .on("mouseout", function(){
-                  d3.select(this).transition().style("margin-left","0px").attr("width","100px").attr("height","100px");
-                })*/
           .transition().duration(300).ease("linear")
                 .style("float","left")
                 .style("position","absolute")
@@ -217,7 +201,21 @@ define([
 
         d3.selectAll(".copy2").data([$(".original2")[0].__data__]);
 
-        var o2 = d3.select(".original2").on("click", function(){
+        var o2 = d3.select(".original2").on("click", function(d, i){
+          pArray1DropBtn2.splice(i, 1);
+
+          d3.select("#w1").transition().duration(1500)
+                .style("top",d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2)+"px");
+
+          d3.select("#w2").transition().duration(1500)
+                  .style("top",d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1)+"px");
+
+          d3.selectAll(".original1").transition().duration(700)
+                .style("margin-top", d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2)+300+"px");
+
+          d3.selectAll(".original2").transition().duration(700)
+                .style("margin-top", d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1)+300+"px");
+
           d3.select(this).transition().duration(300)
                 .style("opacity", "0")
                 .remove();
@@ -237,22 +235,7 @@ define([
                     .style("margin-top", function(d) {
                       pArray1DropBtn2.push(d.mass);
 
-                      //d3.select(".original1").transition().duration(1500)
-                      //    .style("margin-top", function(d){
-
-                        //    var weight = d3.sum(pArray1DropBtn1)-d3.sum(pArray1DropBtn2);
-                            //weights.push(weight+305);
-
-                            //d3.selectAll(".original1").transition().duration(1500)
-                              //      .style("margin-top",-weight+315+"px");
-
-                            //d3.select("#w1").transition().duration(1500)
-                              //      .style("top",weight+"px");
-
-                        //    return weight+315+"px";
-                      //});
-
-                      var weight = d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1);//-d3.sum(p3);
+                      var weight = d3.sum(pArray1DropBtn2)-d3.sum(pArray1DropBtn1);
                       weights2.push(weight+305);
 
                       d3.selectAll(".original1").transition().duration(1500)

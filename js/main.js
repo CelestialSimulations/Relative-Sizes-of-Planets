@@ -28,17 +28,8 @@ requirejs([
 ],function($, d3, planetModel, planetMass, planetDiameter, addPlanet, planetSurfaceArea, planetVolume) {
 
         var planetData =  {"data":[
-        {name: "Sun",	           mass: 1988500,     diameter: 1392000},
-        {name: "Mercury",	       mass: 0.330,       diameter: 4879 },
-        {name: "Venus",	         mass: 4.87,        diameter: 12104 },
         {name: "Earth",      	   mass: 5.97,        diameter: 12756 },
-        {name: "Moon",	         mass: 0.073,       diameter: 3475 },
-        {name: "Mars",	         mass: 0.642,       diameter: 6792 },
-        {name: "Jupiter",	       mass: 1898,        diameter: 142984 },
-        {name: "Saturn",      	 mass: 568,         diameter: 120536 },
-        {name: "Uranus",	       mass: 86.8,        diameter: 51118 },
-        {name: "Neptune",	       mass: 102,         diameter: 49528 },
-        {name: "Pluto",    	     mass: 0.0146,      diameter: 2370 }]
+        ]
       };
 
       this.planet_model = new planetModel (planetData);

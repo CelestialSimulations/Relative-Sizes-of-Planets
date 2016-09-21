@@ -102,8 +102,8 @@ define([
           .attr('class', 'd3-tip')
           .offset([-10, 0])
           .html(function(d, i) {
-            console.log(d);
-            return "<strong>"+dataSorted[i].name+"</strong> <span style='color:red'>" + dataSorted[i].mass + "</span>";
+            console.log(d);                                                                                    // Hint: Use dataSorted[i].diameter and Math.PI 
+            return "<strong>Name: "+dataSorted[i].name+"</strong><br><span style='color:red'>Surface Area: " + "calculate me on line 106 (planetVolume.js)!" + "</span>";
           })
 
       this.svg = d3.select("#vol_svgs").selectAll("svg").data(dataSorted).enter()
@@ -170,7 +170,7 @@ define([
         $( "#vol_slider" ).slider({
             value: 1,
             min: 0,
-            max: 50.01,
+            max: 600.01,
             step: .01,
             slide: function( event, ui ) {
                 $( "#vol_amount" ).val( Math.floor(ui.value*100)+"%" );
