@@ -5,8 +5,7 @@ define([
     'backbone',
     'js/models/planetModel',
     'ext-lib/d3-plugins-master/geodesic/geodesic',
-    'ext-lib/d3-geo-projection/d3-geo-projection',
-    'http://d3js.org/d3.geo.projection.v0.min.js'
+    'ext-lib/d3-projection'
 
 ], function($, $ui, d3, backbone, planetModel) {
 

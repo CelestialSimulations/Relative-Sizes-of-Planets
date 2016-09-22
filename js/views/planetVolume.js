@@ -6,7 +6,6 @@ define([
     'js/models/planetModel',
     'ext-lib/jquery-multiselect',
     'ext-lib/d3-tip'
-    //'http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js'
 
 ], function($, $ui, d3, backbone, planetModel) {
 
