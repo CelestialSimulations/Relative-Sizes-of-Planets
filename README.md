@@ -25,7 +25,7 @@ somedata[0];
 ```
 This code would select the *first* value in somedata. The order in an array actually starts from 0, rather than 1.
 
-In data, we can also use numbers, text(usually called strings), and _objects_. Objects are variables that can store multiple 'properties'. They look like this:
+In data, we can also use numbers, text(usually called strings), and *objects*. Objects are variables that can store multiple 'properties'. They look like this:
 
 ```
 var human = {"name": "Tom", "height": 5.5, "coolness": "9/10", "favorite_movie": "Deadpool"}
@@ -48,7 +48,7 @@ Mass is in units of 10²⁴ kilograms, and diameter is in units of kilometers.
 Here are hints to finding the diameter of each planet.
 
 | Name          | Radius     | Circumference | Surface Area  | Diameter      | Mass     |
-| ------------- |:----------:|:-------------:|:-------------:|:-------------:| --------:|
+| -------------:|:----------:|:-------------:|:-------------:|:-------------:|:-------- |
 | Sun           | <input/>   | 1392000π      | <input/>      | <input/>      | 1988500  |
 | Mercury       | 2439.5     | <input/>      | <input/>      | <input/>      | 0.330    |
 | Venus         | <input/>   | 38025.8       | <input/>      | <input/>      | 4.87     |
@@ -66,7 +66,16 @@ Remember:
 - Circumference = 2 × π × r
 - Surface Area = 4 × π × r²
 
-It will be your job to to add the missing planets. After all, we wouldn't want our lovely planet Earth to be lonely now, would we? And what would be the point of looking at the simulations if there was nothing to compare planet Earth to? ;)
+It will be your job to to add the missing planets. To do this, you'll need to navigate to **main.js** in the code file. It is in the js folder. There is a variable that you'll want to change. It looks like this:
+
+```
+var planetData =  {"data":[
+    {name: "Earth",  mass: 5.97, diameter: 12756 },
+  ]
+};
+```
+
+It is an object with an attribute as an array of objects. As you can see, we only have Earth. Let's fix that! After all, we wouldn't want our lovely planet Earth to be lonely now, would we? And what would be the point of looking at the simulations if there was nothing to compare planet Earth to? ;)
 
 <style>
 input {
@@ -90,8 +99,9 @@ and open it. Type:
 ```
 cd Documents
 ```
-to navigate to the Documents folder within Terminal (it's just like the Finder). Then you'll want to
-type in the following git commands.
+and hit enter to navigate to the Documents folder within Terminal (it's just like the Finder). Then you'll want to
+type in the following git commands. You can just copy and paste the entire block and hit enter. Git will
+do the work for you. Believe in Git.
 
 ```
 git clone https://github.com/CelestialSimulations/Relative-Sizes-of-Planets.git
@@ -99,8 +109,7 @@ cd Relative-Sizes-of-Planets
 git submodule init
 git submodule update
 ```
-After a few seconds, the folder should be ready! Open up Atom (you can just search for it on the computer),
-and drag your folder to the Atom application. You should see all of the code.
+After a few seconds, a folder named Relative-Sizes-of-Planets should appear within the Documents folder! Open up Atom (you can just search for it on the computer) using spotlight, can drag your folder to the Atom application. You should see all of the code.
 
 ### Downloading
 
@@ -134,3 +143,5 @@ and drag your folder to the Atom application. You should see all of the code.
 
 I'm sure you'll want to preview and see if the code appears to work. To do this, simply open the folder
 in finder, and double click on index.html. It will automatically open in the browser.
+
+**Also, you'll probably want to rename the folder so that you know it's yours and won't conflict for the next person who needs to get the code for themselves on the same computer.**

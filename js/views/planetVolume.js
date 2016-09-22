@@ -5,7 +5,8 @@ define([
     'backbone',
     'js/models/planetModel',
     'ext-lib/jquery-multiselect',
-    'http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js'
+    'ext-lib/d3-tip'
+    //'http://labratrevenge.com/d3-tip/javascripts/d3.tip.v0.6.3.js'
 
 ], function($, $ui, d3, backbone, planetModel) {
 
@@ -102,7 +103,7 @@ define([
           .attr('class', 'd3-tip')
           .offset([-10, 0])
           .html(function(d, i) {
-            console.log(d);                                                                                    // Hint: Use dataSorted[i].diameter and Math.PI 
+            console.log(d);                                                                                    // Hint: Use dataSorted[i].diameter and Math.PI
             return "<strong>Name: "+dataSorted[i].name+"</strong><br><span style='color:red'>Surface Area: " + "calculate me on line 106 (planetVolume.js)!" + "</span>";
           })
 
