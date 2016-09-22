@@ -77,12 +77,6 @@ var planetData =  {"data":[
 
 It is an object with an attribute as an array of objects. As you can see, we only have Earth. Let's fix that! After all, we wouldn't want our lovely planet Earth to be lonely now, would we? And what would be the point of looking at the simulations if there was nothing to compare planet Earth to? ;)
 
-<style>
-input {
-  background-color: rgba(0,0,0, 0);
-  border: none;
-}
-</style>
 ## Getting the Code
 
 There are several ways to get the code for the simulation onto your computer:
