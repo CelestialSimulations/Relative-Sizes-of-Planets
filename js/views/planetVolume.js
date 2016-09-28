@@ -119,8 +119,8 @@ define([
           .attr("width", width)
           .attr("height", height)
           .style("margin-left",function(d, i){
-            var scaledSize = $("#"+i+"_path").height();
-            console.log(scaledSize);
+            //var scaledSize = $("#"+i+"_path").height();
+            //console.log(scaledSize);
             return -d.diameter/(pscale/125)+200+"px";
           })
           .style("margin-top", function(d){

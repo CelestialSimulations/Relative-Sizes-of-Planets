@@ -137,14 +137,14 @@ define([
           .attr("class", "graticule")
           .attr("d", path);
 
-      d3.json("/mbostock/raw/4090846/world-110m.json", function(error, world) {
+      /*d3.json("/mbostock/raw/4090846/world-110m.json", function(error, world) {
         if (error) throw error;
 
         svg.insert("path", ".graticule")
             .datum(topojson.feature(world, world.objects.land))
             .attr("class", "land")
             .attr("d", path);
-      });
+      });*/
 
       var menu = d3.select("#projection-menu")
           .on("change", change);

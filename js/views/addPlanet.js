@@ -20,8 +20,8 @@ define([
     /***********************************************/
     initialize: function() {
 
-      var u = this.inputData();
-      console.log(u);
+      this.inputData();
+      //console.log(u);
 
     },
 
