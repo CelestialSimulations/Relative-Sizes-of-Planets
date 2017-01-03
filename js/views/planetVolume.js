@@ -103,7 +103,7 @@ define([
           .offset([-10, 0])
           .html(function(d, i) {
             console.log(d);                                                                                    // Hint: Use dataSorted[i].diameter and Math.PI
-            return "<strong>Name: "+dataSorted[i].name+"</strong><br><span style='color:red'>Surface Area: " + "calculate me on line 106 (planetVolume.js)!" + "</span>";
+            return "<strong>Name: "+dataSorted[i].name+"</strong><br><span style='color:red'>Mass: " + "calculate me on line 106 (planetVolume.js)!" + "</span>";
           })
 
       this.svg = d3.select("#vol_svgs").selectAll("svg").data(dataSorted).enter()
